@@ -7,12 +7,15 @@
 //
 
 #import "AppDelegate.h"
-
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    // Storyboardを使わないので、ここでUIWindowとViewControllerを生成しておく
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.viewcontroller = [[ViewController alloc] initWithNibName:nil bundle:nil];
+    self.window.rootViewController = self.viewcontroller;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 							
@@ -42,5 +45,6 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)events {
+}
 @end

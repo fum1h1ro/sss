@@ -10,16 +10,23 @@
 #import "MyScene.h"
 
 @implementation ViewController
+- (void)loadView {
+    // Storyboardを使わないので、ここで必要なビューを生成する
+    // このメソッドは、ViewControllerがviewプロパティにアクセスした時に一度だけ呼ばれる
+    UIScreen* screen = [UIScreen mainScreen];
+    CGRect rc = screen.bounds;
+    self.view = [[SKView alloc] initWithFrame:rc];
+}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
     // Configure the view.
     SKView * skView = (SKView *)self.view;
     skView.showsFPS = YES;
     skView.showsNodeCount = YES;
-    
+    skView.userInteractionEnabled = YES;
     // Create and configure the scene.
     SKScene * scene = [MyScene sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
@@ -47,5 +54,4 @@
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
-
 @end

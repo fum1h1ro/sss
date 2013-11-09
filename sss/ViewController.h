@@ -10,5 +10,5 @@
 #import <SpriteKit/SpriteKit.h>
 
 @interface ViewController : UIViewController
-
+@property (strong, nonatomic) SKView* mainview;
 @end

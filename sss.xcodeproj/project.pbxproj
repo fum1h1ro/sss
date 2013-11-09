@@ -14,7 +14,6 @@
 		89DC0C39182CC072007F3384 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89DC0C37182CC072007F3384 /* InfoPlist.strings */; };
 		89DC0C3B182CC072007F3384 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DC0C3A182CC072007F3384 /* main.m */; };
 		89DC0C3F182CC072007F3384 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DC0C3E182CC072007F3384 /* AppDelegate.m */; };
-		89DC0C42182CC072007F3384 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89DC0C40182CC072007F3384 /* Main.storyboard */; };
 		89DC0C45182CC072007F3384 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DC0C44182CC072007F3384 /* ViewController.m */; };
 		89DC0C48182CC072007F3384 /* MyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DC0C47182CC072007F3384 /* MyScene.m */; };
 		89DC0C4A182CC072007F3384 /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 89DC0C49182CC072007F3384 /* Spaceship.png */; };
@@ -48,7 +47,6 @@
 		89DC0C3C182CC072007F3384 /* sss-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sss-Prefix.pch"; sourceTree = "<group>"; };
 		89DC0C3D182CC072007F3384 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		89DC0C3E182CC072007F3384 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		89DC0C41182CC072007F3384 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		89DC0C43182CC072007F3384 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		89DC0C44182CC072007F3384 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		89DC0C46182CC072007F3384 /* MyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyScene.h; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 			children = (
 				89DC0C3D182CC072007F3384 /* AppDelegate.h */,
 				89DC0C3E182CC072007F3384 /* AppDelegate.m */,
-				89DC0C40182CC072007F3384 /* Main.storyboard */,
 				89DC0C43182CC072007F3384 /* ViewController.h */,
 				89DC0C44182CC072007F3384 /* ViewController.m */,
 				89DC0C46182CC072007F3384 /* MyScene.h */,
@@ -243,7 +240,6 @@
 				89DC0C39182CC072007F3384 /* InfoPlist.strings in Resources */,
 				89DC0C4C182CC072007F3384 /* Images.xcassets in Resources */,
 				89DC0C4A182CC072007F3384 /* Spaceship.png in Resources */,
-				89DC0C42182CC072007F3384 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,14 +290,6 @@
 				89DC0C38182CC072007F3384 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		89DC0C40182CC072007F3384 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				89DC0C41182CC072007F3384 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		89DC0C5B182CC072007F3384 /* InfoPlist.strings */ = {
