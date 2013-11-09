@@ -7,7 +7,7 @@
 //
 
 #import "MyScene.h"
-
+#import "VirtualHID.h"
 @implementation MyScene
 
 -(id)initWithSize:(CGSize)size {    
@@ -47,6 +47,9 @@
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
+    VirtualHID* hid = [VirtualHID shared];
+    if (hid.isTouch)
+        NSLog(@"TOUCH");
 }
 
 @end

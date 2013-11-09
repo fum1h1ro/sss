@@ -9,5 +9,6 @@
 #import <SpriteKit/SpriteKit.h>
 
 @interface GameView : SKView
-
+@property (assign, nonatomic) BOOL touch;
+@property (assign, nonatomic) CGPoint touchPos;
 @end

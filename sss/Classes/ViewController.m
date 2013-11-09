@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "MyScene.h"
+#import "GameView.h"
 
 @implementation ViewController
 - (void)loadView {
@@ -15,7 +16,7 @@
     // このメソッドは、ViewControllerがviewプロパティにアクセスした時に一度だけ呼ばれる
     UIScreen* screen = [UIScreen mainScreen];
     CGRect rc = screen.bounds;
-    self.view = [[SKView alloc] initWithFrame:rc];
+    self.view = [[GameView alloc] initWithFrame:rc];
 }
 
 
