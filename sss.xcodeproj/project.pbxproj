@@ -13,16 +13,17 @@
 		89DC0C33182CC072007F3384 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DC0C32182CC072007F3384 /* SpriteKit.framework */; };
 		89DC0C39182CC072007F3384 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89DC0C37182CC072007F3384 /* InfoPlist.strings */; };
 		89DC0C3B182CC072007F3384 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DC0C3A182CC072007F3384 /* main.m */; };
-		89DC0C3F182CC072007F3384 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DC0C3E182CC072007F3384 /* AppDelegate.m */; };
-		89DC0C45182CC072007F3384 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DC0C44182CC072007F3384 /* ViewController.m */; };
-		89DC0C48182CC072007F3384 /* MyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DC0C47182CC072007F3384 /* MyScene.m */; };
-		89DC0C4A182CC072007F3384 /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 89DC0C49182CC072007F3384 /* Spaceship.png */; };
 		89DC0C4C182CC072007F3384 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89DC0C4B182CC072007F3384 /* Images.xcassets */; };
 		89DC0C53182CC072007F3384 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DC0C52182CC072007F3384 /* XCTest.framework */; };
 		89DC0C54182CC072007F3384 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DC0C2C182CC072007F3384 /* Foundation.framework */; };
 		89DC0C55182CC072007F3384 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DC0C30182CC072007F3384 /* UIKit.framework */; };
 		89DC0C5D182CC072007F3384 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89DC0C5B182CC072007F3384 /* InfoPlist.strings */; };
 		89DC0C5F182CC072007F3384 /* sssTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DC0C5E182CC072007F3384 /* sssTests.m */; };
+		89DC0CBD182E3F86007F3384 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DC0CB6182E3F86007F3384 /* AppDelegate.m */; };
+		89DC0CBE182E3F86007F3384 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DC0CB8182E3F86007F3384 /* GameView.m */; };
+		89DC0CBF182E3F86007F3384 /* MyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DC0CBA182E3F86007F3384 /* MyScene.m */; };
+		89DC0CC0182E3F86007F3384 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DC0CBC182E3F86007F3384 /* ViewController.m */; };
+		89DC0CC3182E404F007F3384 /* Test.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 89DC0CC2182E404F007F3384 /* Test.atlas */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,19 +46,21 @@
 		89DC0C38182CC072007F3384 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		89DC0C3A182CC072007F3384 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		89DC0C3C182CC072007F3384 /* sss-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sss-Prefix.pch"; sourceTree = "<group>"; };
-		89DC0C3D182CC072007F3384 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		89DC0C3E182CC072007F3384 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		89DC0C43182CC072007F3384 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		89DC0C44182CC072007F3384 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		89DC0C46182CC072007F3384 /* MyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyScene.h; sourceTree = "<group>"; };
-		89DC0C47182CC072007F3384 /* MyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyScene.m; sourceTree = "<group>"; };
-		89DC0C49182CC072007F3384 /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
 		89DC0C4B182CC072007F3384 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		89DC0C51182CC072007F3384 /* sssTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sssTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		89DC0C52182CC072007F3384 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		89DC0C5A182CC072007F3384 /* sssTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "sssTests-Info.plist"; sourceTree = "<group>"; };
 		89DC0C5C182CC072007F3384 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		89DC0C5E182CC072007F3384 /* sssTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sssTests.m; sourceTree = "<group>"; };
+		89DC0CB5182E3F86007F3384 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		89DC0CB6182E3F86007F3384 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		89DC0CB7182E3F86007F3384 /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
+		89DC0CB8182E3F86007F3384 /* GameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
+		89DC0CB9182E3F86007F3384 /* MyScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyScene.h; sourceTree = "<group>"; };
+		89DC0CBA182E3F86007F3384 /* MyScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyScene.m; sourceTree = "<group>"; };
+		89DC0CBB182E3F86007F3384 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		89DC0CBC182E3F86007F3384 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		89DC0CC2182E404F007F3384 /* Test.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Test.atlas; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,13 +122,8 @@
 		89DC0C34182CC072007F3384 /* sss */ = {
 			isa = PBXGroup;
 			children = (
-				89DC0C3D182CC072007F3384 /* AppDelegate.h */,
-				89DC0C3E182CC072007F3384 /* AppDelegate.m */,
-				89DC0C43182CC072007F3384 /* ViewController.h */,
-				89DC0C44182CC072007F3384 /* ViewController.m */,
-				89DC0C46182CC072007F3384 /* MyScene.h */,
-				89DC0C47182CC072007F3384 /* MyScene.m */,
-				89DC0C49182CC072007F3384 /* Spaceship.png */,
+				89DC0CB1182E3D15007F3384 /* Classes */,
+				89DC0CB0182E3CFC007F3384 /* Resources */,
 				89DC0C4B182CC072007F3384 /* Images.xcassets */,
 				89DC0C35182CC072007F3384 /* Supporting Files */,
 			);
@@ -159,6 +157,29 @@
 				89DC0C5B182CC072007F3384 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		89DC0CB0182E3CFC007F3384 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				89DC0CC2182E404F007F3384 /* Test.atlas */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		89DC0CB1182E3D15007F3384 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				89DC0CB5182E3F86007F3384 /* AppDelegate.h */,
+				89DC0CB6182E3F86007F3384 /* AppDelegate.m */,
+				89DC0CB7182E3F86007F3384 /* GameView.h */,
+				89DC0CB8182E3F86007F3384 /* GameView.m */,
+				89DC0CB9182E3F86007F3384 /* MyScene.h */,
+				89DC0CBA182E3F86007F3384 /* MyScene.m */,
+				89DC0CBB182E3F86007F3384 /* ViewController.h */,
+				89DC0CBC182E3F86007F3384 /* ViewController.m */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,8 +259,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				89DC0C39182CC072007F3384 /* InfoPlist.strings in Resources */,
+				89DC0CC3182E404F007F3384 /* Test.atlas in Resources */,
 				89DC0C4C182CC072007F3384 /* Images.xcassets in Resources */,
-				89DC0C4A182CC072007F3384 /* Spaceship.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,10 +279,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89DC0C48182CC072007F3384 /* MyScene.m in Sources */,
-				89DC0C45182CC072007F3384 /* ViewController.m in Sources */,
-				89DC0C3F182CC072007F3384 /* AppDelegate.m in Sources */,
+				89DC0CBF182E3F86007F3384 /* MyScene.m in Sources */,
+				89DC0CBE182E3F86007F3384 /* GameView.m in Sources */,
+				89DC0CBD182E3F86007F3384 /* AppDelegate.m in Sources */,
 				89DC0C3B182CC072007F3384 /* main.m in Sources */,
+				89DC0CC0182E3F86007F3384 /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
