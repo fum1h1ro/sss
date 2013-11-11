@@ -3,18 +3,18 @@
 //  sss
 //
 //  Created by Kanaya Fumihiro on 2013/11/08.
-//  Copyright (c) 2013å¹´ alwaystesting. All rights reserved.
+//  Copyright (c) 2013”N alwaystesting. All rights reserved.
 //
 
 #import "MyScene.h"
 #import "VirtualHID.h"
 @implementation MyScene
 
--(id)initWithSize:(CGSize)size {    
+-(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         
-        self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
+        self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:1.0 alpha:1.0];
         
         SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         
@@ -35,7 +35,8 @@
         
         SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
         
-        sprite.position = location;
+        sprite.size = CGSizeMake(320, 320);
+        sprite.position = CGPointMake(320, 0);
         
         SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
         

@@ -1,13 +1,13 @@
 //
-//  ViewController.h
+//  GameScene.h
 //  sss
 //
-
+//  Created by Kanaya Fumihiro on 2013/11/11.
 //  Copyright (c) 2013年 alwaystesting. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <SpriteKit/SpriteKit.h>
 
-@interface ViewController : UIViewController
+@interface GameScene : SKScene
++ (GameScene*)scene;
 @end

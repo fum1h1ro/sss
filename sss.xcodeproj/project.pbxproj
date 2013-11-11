@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		896FADDD1830EE3100AD2DF1 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 896FADDC1830EE3100AD2DF1 /* GameScene.m */; };
 		89DC0C2D182CC072007F3384 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DC0C2C182CC072007F3384 /* Foundation.framework */; };
 		89DC0C2F182CC072007F3384 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DC0C2E182CC072007F3384 /* CoreGraphics.framework */; };
 		89DC0C31182CC072007F3384 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DC0C30182CC072007F3384 /* UIKit.framework */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		896FADDB1830EE3100AD2DF1 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		896FADDC1830EE3100AD2DF1 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 		89DC0C29182CC072007F3384 /* sss.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sss.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89DC0C2C182CC072007F3384 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		89DC0C2E182CC072007F3384 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -64,7 +67,6 @@
 		89DC0CC2182E404F007F3384 /* Test.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Test.atlas; sourceTree = "<group>"; };
 		89DC0CC4182E4BBB007F3384 /* VirtualHID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualHID.h; sourceTree = "<group>"; };
 		89DC0CC5182E4BBB007F3384 /* VirtualHID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualHID.m; sourceTree = "<group>"; };
-		89DC0CC7182E50F1007F3384 /* VirtualHID+friend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VirtualHID+friend.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,9 +184,10 @@
 				89DC0CBA182E3F86007F3384 /* MyScene.m */,
 				89DC0CBB182E3F86007F3384 /* ViewController.h */,
 				89DC0CBC182E3F86007F3384 /* ViewController.m */,
-				89DC0CC7182E50F1007F3384 /* VirtualHID+friend.h */,
 				89DC0CC4182E4BBB007F3384 /* VirtualHID.h */,
 				89DC0CC5182E4BBB007F3384 /* VirtualHID.m */,
+				896FADDB1830EE3100AD2DF1 /* GameScene.h */,
+				896FADDC1830EE3100AD2DF1 /* GameScene.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				89DC0CBF182E3F86007F3384 /* MyScene.m in Sources */,
 				89DC0CC6182E4BBB007F3384 /* VirtualHID.m in Sources */,
 				89DC0CBE182E3F86007F3384 /* GameView.m in Sources */,
+				896FADDD1830EE3100AD2DF1 /* GameScene.m in Sources */,
 				89DC0CBD182E3F86007F3384 /* AppDelegate.m in Sources */,
 				89DC0C3B182CC072007F3384 /* main.m in Sources */,
 				89DC0CC0182E3F86007F3384 /* ViewController.m in Sources */,
@@ -494,6 +498,7 @@
 				89DC0C64182CC072007F3384 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		89DC0C65182CC072007F3384 /* Build configuration list for PBXNativeTarget "sssTests" */ = {
 			isa = XCConfigurationList;
@@ -502,6 +507,7 @@
 				89DC0C67182CC072007F3384 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

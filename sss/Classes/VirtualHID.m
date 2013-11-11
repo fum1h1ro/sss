@@ -21,4 +21,12 @@ static VirtualHID* shared_ = nil;
     }
     return self;
 }
+- (void)touchesBegan:(NSSet*)touches {
+    _isTouch = YES;
+}
+- (void)touchesEnded:(NSSet*)touches {
+    _isTouch = NO;
+}
+- (void)touchesMoved:(NSSet*)touches {
+}
 @end

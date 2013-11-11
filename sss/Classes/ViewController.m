@@ -1,44 +1,45 @@
-//
-//  ViewController.m
-//  sss
-//
-//  Created by Kanaya Fumihiro on 2013/11/08.
-//  Copyright (c) 2013年 alwaystesting. All rights reserved.
-//
+// vim: fenc=utf-8
 
 #import "ViewController.h"
 #import "MyScene.h"
 #import "GameView.h"
+#import "GameScene.h"
 
 @implementation ViewController
+// Storyboardを使わないので、ここで必要なビューを生成する
+// このメソッドは、ViewControllerがviewプロパティにアクセスした時に一度だけ呼ばれる
+// 自分から呼び出す必要はない
 - (void)loadView {
-    // Storyboardを使わないので、ここで必要なビューを生成する
-    // このメソッドは、ViewControllerがviewプロパティにアクセスした時に一度だけ呼ばれる
     UIScreen* screen = [UIScreen mainScreen];
     CGRect rc = screen.bounds;
     self.view = [[GameView alloc] initWithFrame:rc];
 }
-
-
-- (void)viewDidLoad
-{
+// loadViewが完了したあとに呼ばれる
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Configure the view.
-    SKView * skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
-    skView.userInteractionEnabled = YES;
+    GameView* view = (GameView*)self.view;
+#ifdef DEBUG
+    view.showsFPS = YES;
+    view.showsDrawCount = YES;
+    view.showsNodeCount = YES;
+#endif
+    view.userInteractionEnabled = YES;
+    view.contentScaleFactor = [UIScreen mainScreen].scale;
     // Create and configure the scene.
-    SKScene * scene = [MyScene sceneWithSize:skView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
+    GameScene* scene = [[GameScene alloc] init];
     
     // Present the scene.
-    [skView presentScene:scene];
+    [view presentScene:scene];
 }
-
-- (BOOL)shouldAutorotate
-{
-    return YES;
+//
+- (void)viewDidLayoutSubviews {
+    GameView* view = (GameView*)self.view;
+    [view layoutSubviewsLocal];
+}
+//
+- (BOOL)shouldAutorotate {
+    return NO;
 }
 
 - (NSUInteger)supportedInterfaceOrientations
