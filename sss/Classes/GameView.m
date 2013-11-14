@@ -1,9 +1,9 @@
 // vim: fenc=utf-8
 //  GameView.m
 //  sss
-//
+//  ほげほげ
 //  Created by Kanaya Fumihiro on 2013/11/09.
-//  Copyright (c) 2013�N alwaystesting. All rights reserved.
+//  Copyright (c) 2013 alwaystesting. All rights reserved.
 //
 
 #import "GameView.h"
@@ -19,48 +19,25 @@
 @implementation GameView
 //
 - (id)initWithFrame:(CGRect)frame {
-    CGFloat longer = fmax(frame.size.width, frame.size.height);
-    CGRect gameframe = frame;
-    _isInch4 = NO;
-    if (longer <= kSCREEN_HEIGHT_NON_RETINA) {
-        // 4:3
-        NSLog(@"4:3");
-    } else {
-        // 約16:9
-        NSLog(@"16:9");
-        if (frame.size.width < frame.size.height) {
-            gameframe.size.height = kSCREEN_HEIGHT_NON_RETINA/2;
-        } else {
-            gameframe.size.width = kSCREEN_HEIGHT_NON_RETINA;
-        }
-        _isInch4 = YES;
-    }
-    if (self = [super initWithFrame:gameframe]) {
-        // Initialization code
-        [VirtualHID shared];
-        self.backgroundColor = [UIColor redColor];
-        if (_isInch4) {
-            CGFloat h = (kSCREEN_HEIGHT_4INCH/2) - kSCREEN_HEIGHT_NON_RETINA;
-            CGRect rc = CGRectMake(0, kSCREEN_HEIGHT_4INCH/2-h, kSCREEN_WIDTH_NON_RETINA, h);
-            _frameView = [[UIView alloc] initWithFrame:rc];
-            _frameView.backgroundColor = [UIColor whiteColor];
-            [self addSubview:_frameView];
-        }
-
+    if (self = [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor greenColor];
+#ifdef DEBUG
+        self.showsFPS = YES;
+        self.showsDrawCount = YES;
+        self.showsNodeCount = YES;
+#endif
+        self.contentScaleFactor = 1.0f;
+#if 0
+        CAEAGLLayer* layer = (CAEAGLLayer*)self.layer;
+        layer.drawableProperties = @{
+            kEAGLDrawablePropertyColorFormat : kEAGLColorFormatRGBA8,
+            kEAGLDrawablePropertyRetainedBacking : @YES
+        };
+#endif
     }
     return self;
 }
-//
-- (void)layoutSubviewsLocal {
-    if (_isInch4) {
-        CGFloat gameh = kSCREEN_HEIGHT_NON_RETINA;
-        CGFloat frameh = (kSCREEN_HEIGHT_4INCH/2) - kSCREEN_HEIGHT_NON_RETINA;
-        CGRect gamerc = CGRectMake(0, 0, kSCREEN_WIDTH_NON_RETINA, kSCREEN_HEIGHT_NON_RETINA);
-        CGRect framerc = CGRectMake(0, gameh, kSCREEN_WIDTH_NON_RETINA, frameh);
-        self.frame = gamerc;
-        _frameView.frame = framerc;
-    }
-}
+#if 0
 //
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
     [[VirtualHID shared] touchesBegan:touches];
@@ -78,13 +55,19 @@
     [[VirtualHID shared] touchesMoved:touches];
     [super touchesMoved:touches withEvent:event];
 }
+#endif
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
+- (void)drawRect:(CGRect)rect {
     // Drawing code
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetInterpolationQuality(context, kCGInterpolationNone);
+
+    //[(CALayer*)_gameView.layer drawInContext:context];
+    //CGContextDrawImage(context, CGRectMake(0, 0, 50, 50), 
+    CGContextSetRGBFillColor(context, 1, 0, 1, 1);
+    CGContextFillRect(context, CGRectMake(0, 80, 90, 90));
 }
 */
-
 @end
