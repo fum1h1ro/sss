@@ -30,11 +30,11 @@
     CGFloat longer = fmax(screenrc.size.width, screenrc.size.height);
     if (longer <= kSCREEN_HEIGHT_35INCH) {
         // 4:3
-        NSLog(@"4:3");
+        NS_LOG(@"4:3");
         _isInch4 = NO;
     } else {
         // 約16:9
-        NSLog(@"16:9");
+        NS_LOG(@"16:9");
         _isInch4 = YES;
     }
     self.view = [[TouchView alloc] initWithFrame:screenrc];

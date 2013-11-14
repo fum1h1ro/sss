@@ -41,11 +41,11 @@
 //
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
     [[VirtualHID shared] touchesBegan:touches];
-    NSLog(@"%fx%f", self.frame.size.width, self.frame.size.height);
+    NS_LOG(@"%fx%f", self.frame.size.width, self.frame.size.height);
     [super touchesBegan:touches withEvent:event];
 }
 - (void)touchesCancelled:(NSSet*)touches withEvent:(UIEvent*)event {
-    NSLog(@"CANCEL");
+    NS_LOG(@"CANCEL");
 }
 - (void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
     [[VirtualHID shared] touchesEnded:touches];

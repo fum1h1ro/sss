@@ -38,7 +38,7 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     CGSize sz = self.size;
-    NSLog(@"%f, %f", sz.width, sz.height);
+    NS_LOG(@"%f, %f", sz.width, sz.height);
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
         

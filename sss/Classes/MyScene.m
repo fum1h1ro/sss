@@ -50,7 +50,7 @@
     /* Called before each frame is rendered */
     VirtualHID* hid = [VirtualHID shared];
     if (hid.isTouch)
-        NSLog(@"TOUCH");
+        NS_LOG(@"TOUCH");
 }
 
 @end
