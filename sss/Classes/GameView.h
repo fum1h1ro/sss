@@ -10,4 +10,5 @@
 
 @interface GameView : SKView {
 }
++ (GameView*)shared;
 @end

@@ -32,7 +32,7 @@ static DisplayView* instance = nil;
     CGContextSetInterpolationQuality(context, kCGInterpolationNone);
 
     //[(CALayer*)_view.layer drawInContext:context];
-    CGContextDrawImage(context, CGRectMake(0, 0, 120, 120), CFBridgingRetain((_view.layer.contents)));
+    //CGContextDrawImage(context, CGRectMake(0, 0, 120, 120), CFBridgingRetain((_view.layer.contents)));
     //CGContextSetRGBFillColor(context, 0, 0, 1, 1);
     //CGContextFillRect(context, CGRectMake(0, 0, 90, 90));
 

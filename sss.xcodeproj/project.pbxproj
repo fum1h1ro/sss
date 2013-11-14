@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		895210841834BB8F0046F123 /* DisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 895210831834BB8F0046F123 /* DisplayView.m */; };
+		895210881834FBB00046F123 /* GameObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 895210871834FBB00046F123 /* GameObjectManager.m */; };
 		896FADDD1830EE3100AD2DF1 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 896FADDC1830EE3100AD2DF1 /* GameScene.m */; };
 		89B882281833687F008DE700 /* TouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B882271833687F008DE700 /* TouchView.m */; };
 		89DC0C2D182CC072007F3384 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DC0C2C182CC072007F3384 /* Foundation.framework */; };
@@ -44,6 +45,8 @@
 		895210811834BB240046F123 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		895210821834BB8F0046F123 /* DisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayView.h; sourceTree = "<group>"; };
 		895210831834BB8F0046F123 /* DisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayView.m; sourceTree = "<group>"; };
+		895210861834FBB00046F123 /* GameObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObjectManager.h; sourceTree = "<group>"; };
+		895210871834FBB00046F123 /* GameObjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameObjectManager.m; sourceTree = "<group>"; };
 		896FADDB1830EE3100AD2DF1 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		896FADDC1830EE3100AD2DF1 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 		89B882261833687F008DE700 /* TouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchView.h; sourceTree = "<group>"; };
@@ -200,6 +203,8 @@
 				895210811834BB240046F123 /* Common.h */,
 				895210821834BB8F0046F123 /* DisplayView.h */,
 				895210831834BB8F0046F123 /* DisplayView.m */,
+				895210861834FBB00046F123 /* GameObjectManager.h */,
+				895210871834FBB00046F123 /* GameObjectManager.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -320,6 +325,7 @@
 			files = (
 				89DC0CBF182E3F86007F3384 /* MyScene.m in Sources */,
 				895210841834BB8F0046F123 /* DisplayView.m in Sources */,
+				895210881834FBB00046F123 /* GameObjectManager.m in Sources */,
 				89DC0CC6182E4BBB007F3384 /* VirtualHID.m in Sources */,
 				89DC0CBE182E3F86007F3384 /* GameView.m in Sources */,
 				896FADDD1830EE3100AD2DF1 /* GameScene.m in Sources */,

@@ -9,17 +9,16 @@
 #import "GameView.h"
 #import "VirtualHID.h"
 
-#define kSCREEN_WIDTH_NON_RETINA 320
-#define kSCREEN_HEIGHT_NON_RETINA 480
-#define kSCREEN_WIDTH_35INCH 640
-#define kSCREEN_HEIGHT_35INCH 960
-#define kSCREEN_WIDTH_4INCH 640
-#define kSCREEN_HEIGHT_4INCH 1136
-
+static GameView* instance2 = nil;
 @implementation GameView
+//
++ (GameView*)shared {
+    return instance2;
+}
 //
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+        instance2 = self;
         self.backgroundColor = [UIColor greenColor];
 #ifdef DEBUG
         self.showsFPS = YES;
@@ -27,13 +26,6 @@
         self.showsNodeCount = YES;
 #endif
         self.contentScaleFactor = 1.0f;
-#if 0
-        CAEAGLLayer* layer = (CAEAGLLayer*)self.layer;
-        layer.drawableProperties = @{
-            kEAGLDrawablePropertyColorFormat : kEAGLColorFormatRGBA8,
-            kEAGLDrawablePropertyRetainedBacking : @YES
-        };
-#endif
     }
     return self;
 }
