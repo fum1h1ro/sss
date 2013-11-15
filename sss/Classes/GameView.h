@@ -1,14 +1,8 @@
-//
-//  GameView.h
-//  sss
-//
-//  Created by Kanaya Fumihiro on 2013/11/09.
-//  Copyright (c) 2013年 alwaystesting. All rights reserved.
-//
-
+// vim: fenc=utf-8
 #import <SpriteKit/SpriteKit.h>
 
-@interface GameView : SKView {
-}
+// SKViewを継承したGame表示用ビュー
+// なんか追加あるかなと思って継承させたけど、そのままになってしまった
+@interface GameView : SKView
 + (GameView*)shared;
 @end

@@ -2,7 +2,6 @@
 
 #import "Common.h"
 #import "ViewController.h"
-#import "MyScene.h"
 #import "TouchView.h"
 #import "GameView.h"
 #import "GameScene.h"

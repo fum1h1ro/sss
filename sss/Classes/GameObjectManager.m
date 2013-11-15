@@ -84,10 +84,16 @@
 }
 //
 - (void)updateInit:(NSTimeInterval)dt {
-    SKTexture* base = [SKTexture textureWithImageNamed:@"sss"];
-    SKTexture* tex = [SKTexture textureWithRect:CGRectMake(0, 0, 0.5f, 0.5f) inTexture:base];
-    SKSpriteNode* sprite = [SKSpriteNode spriteNodeWithTexture:tex];
-    sprite.size = CGSizeMake(160, 160);
+    SKTextureAtlas* atlas = [SKTextureAtlas atlasNamed:@"Test"];
+    SKTexture* base = [atlas textureNamed:@"sss"];
+    //SKTexture* base = [SKTexture textureWithImageNamed:@"sss"];
+    SKTexture* tex = [SKTexture textureWithRect:CGRectMake(0, 0.5f, 0.5f, 0.5f) inTexture:base];
+    base.filteringMode = SKTextureFilteringNearest;
+    tex.filteringMode = SKTextureFilteringNearest;
+    CGRect rc = [tex textureRect];
+    NS_LOG(@"%f %f %f %f", rc.origin.x, rc.origin.y, rc.size.width, rc.size.height);
+    SKSpriteNode* sprite = [SKSpriteNode spriteNodeWithTexture:base];
+    //sprite.size = CGSizeMake(160, 160);
     sprite.position = CGPointMake(160, 240);
     //SKAction *action = [SKAction rotateByAngle:M_PI duration:31];
     //[sprite runAction:[SKAction repeatActionForever:action]];
