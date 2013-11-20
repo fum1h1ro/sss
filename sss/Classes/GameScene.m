@@ -1,19 +1,13 @@
-//
-//  GameScene.m
-//  sss
-//
-//  Created by Kanaya Fumihiro on 2013/11/11.
-//  Copyright (c) 2013年 alwaystesting. All rights reserved.
-//
-
-//#import "ViewController.h"
-//#import "DisplayView.h"
+#import "GameCommon.h"
 #import "GameObjectManager.h"
 #import "GameScene.h"
+#import "GameHID.h"
 
 @implementation GameScene
 - (id)init {
     CGSize size = CGSizeMake(320, 480);
+    size.width *= 0.5f;
+    size.height *= 0.5f;
     if (self = [super initWithSize:size]) {
         _objectManager = [[GameObjectManager alloc] initWithScene:self];
         //self.scaleMode = SKSceneScaleModeAspectFill;
@@ -27,11 +21,18 @@
 }
 //
 - (void)update:(CFTimeInterval)dt {
+    [[GameHID shared] update];
     [_objectManager updateAllGameObject:dt];
 #ifdef USE_DISPLAY_VIEW
     UIView* view = [self.view snapshotViewAfterScreenUpdates:NO];
     [DisplayView shared].view = view;
     [[DisplayView shared] setNeedsDisplay];
 #endif
+}
+//
++ (SKEmitterNode*)createEmitterNode:(NSString*)name {
+    NSString* path = [[NSBundle mainBundle] pathForResource:name ofType:@"sks"];
+    SKEmitterNode* node = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+    return node;
 }
 @end

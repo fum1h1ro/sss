@@ -7,10 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		890C29B01839F0380068E0D9 /* bomb.sks in Resources */ = {isa = PBXBuildFile; fileRef = 890C29AE1839F0380068E0D9 /* bomb.sks */; };
+		890C29B11839F0380068E0D9 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 890C29AF1839F0380068E0D9 /* spark.png */; };
+		890C29B5183A27DE0068E0D9 /* jet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 890C29B4183A27DE0068E0D9 /* jet.sks */; };
 		895210841834BB8F0046F123 /* DisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 895210831834BB8F0046F123 /* DisplayView.m */; };
 		895210881834FBB00046F123 /* GameObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 895210871834FBB00046F123 /* GameObjectManager.m */; };
 		896FADDD1830EE3100AD2DF1 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 896FADDC1830EE3100AD2DF1 /* GameScene.m */; };
-		89B882281833687F008DE700 /* TouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B882271833687F008DE700 /* TouchView.m */; };
+		89B882281833687F008DE700 /* GameTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B882271833687F008DE700 /* GameTouchView.m */; };
+		89D227EE183CA9B300FD45C0 /* main.png in Resources */ = {isa = PBXBuildFile; fileRef = 89D227ED183CA9B300FD45C0 /* main.png */; };
+		89D227F1183CB47300FD45C0 /* GameUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D227F0183CB47300FD45C0 /* GameUtil.m */; };
 		89DC0C2D182CC072007F3384 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DC0C2C182CC072007F3384 /* Foundation.framework */; };
 		89DC0C2F182CC072007F3384 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DC0C2E182CC072007F3384 /* CoreGraphics.framework */; };
 		89DC0C31182CC072007F3384 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DC0C30182CC072007F3384 /* UIKit.framework */; };
@@ -27,7 +32,7 @@
 		89DC0CBE182E3F86007F3384 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DC0CB8182E3F86007F3384 /* GameView.m */; };
 		89DC0CC0182E3F86007F3384 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DC0CBC182E3F86007F3384 /* ViewController.m */; };
 		89DC0CC3182E404F007F3384 /* Test.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 89DC0CC2182E404F007F3384 /* Test.atlas */; };
-		89DC0CC6182E4BBB007F3384 /* VirtualHID.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DC0CC5182E4BBB007F3384 /* VirtualHID.m */; };
+		89DC0CC6182E4BBB007F3384 /* GameHID.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DC0CC5182E4BBB007F3384 /* GameHID.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,15 +46,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		895210811834BB240046F123 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		890C29AE1839F0380068E0D9 /* bomb.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = bomb.sks; sourceTree = "<group>"; };
+		890C29AF1839F0380068E0D9 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		890C29B4183A27DE0068E0D9 /* jet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = jet.sks; sourceTree = "<group>"; };
+		895210811834BB240046F123 /* GameCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameCommon.h; sourceTree = "<group>"; };
 		895210821834BB8F0046F123 /* DisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayView.h; sourceTree = "<group>"; };
 		895210831834BB8F0046F123 /* DisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayView.m; sourceTree = "<group>"; };
 		895210861834FBB00046F123 /* GameObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObjectManager.h; sourceTree = "<group>"; };
 		895210871834FBB00046F123 /* GameObjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameObjectManager.m; sourceTree = "<group>"; };
 		896FADDB1830EE3100AD2DF1 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		896FADDC1830EE3100AD2DF1 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
-		89B882261833687F008DE700 /* TouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchView.h; sourceTree = "<group>"; };
-		89B882271833687F008DE700 /* TouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchView.m; sourceTree = "<group>"; };
+		89B882261833687F008DE700 /* GameTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTouchView.h; sourceTree = "<group>"; };
+		89B882271833687F008DE700 /* GameTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameTouchView.m; sourceTree = "<group>"; };
+		89D227ED183CA9B300FD45C0 /* main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main.png; sourceTree = "<group>"; };
+		89D227EF183CB47300FD45C0 /* GameUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameUtil.h; sourceTree = "<group>"; };
+		89D227F0183CB47300FD45C0 /* GameUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameUtil.m; sourceTree = "<group>"; };
+		89D227F2183CBD3E00FD45C0 /* Game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		89DC0C29182CC072007F3384 /* sss.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sss.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89DC0C2C182CC072007F3384 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		89DC0C2E182CC072007F3384 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -72,8 +84,8 @@
 		89DC0CBB182E3F86007F3384 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		89DC0CBC182E3F86007F3384 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		89DC0CC2182E404F007F3384 /* Test.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Test.atlas; sourceTree = "<group>"; };
-		89DC0CC4182E4BBB007F3384 /* VirtualHID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualHID.h; sourceTree = "<group>"; };
-		89DC0CC5182E4BBB007F3384 /* VirtualHID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualHID.m; sourceTree = "<group>"; };
+		89DC0CC4182E4BBB007F3384 /* GameHID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameHID.h; sourceTree = "<group>"; };
+		89DC0CC5182E4BBB007F3384 /* GameHID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameHID.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +113,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		890C29B3183A279A0068E0D9 /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				890C29AF1839F0380068E0D9 /* spark.png */,
+				890C29AE1839F0380068E0D9 /* bomb.sks */,
+				890C29B4183A27DE0068E0D9 /* jet.sks */,
+			);
+			name = Effects;
+			sourceTree = "<group>";
+		};
+		895210891836587E0046F123 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				89D227F2183CBD3E00FD45C0 /* Game.h */,
+				895210811834BB240046F123 /* GameCommon.h */,
+				89DC0CC4182E4BBB007F3384 /* GameHID.h */,
+				89DC0CC5182E4BBB007F3384 /* GameHID.m */,
+				895210861834FBB00046F123 /* GameObjectManager.h */,
+				895210871834FBB00046F123 /* GameObjectManager.m */,
+				896FADDB1830EE3100AD2DF1 /* GameScene.h */,
+				896FADDC1830EE3100AD2DF1 /* GameScene.m */,
+				89B882261833687F008DE700 /* GameTouchView.h */,
+				89B882271833687F008DE700 /* GameTouchView.m */,
+				89D227EF183CB47300FD45C0 /* GameUtil.h */,
+				89D227F0183CB47300FD45C0 /* GameUtil.m */,
+				89DC0CB7182E3F86007F3384 /* GameView.h */,
+				89DC0CB8182E3F86007F3384 /* GameView.m */,
+			);
+			name = Game;
+			sourceTree = "<group>";
+		};
 		89DC0C20182CC072007F3384 = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +218,8 @@
 		89DC0CB0182E3CFC007F3384 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				89D227ED183CA9B300FD45C0 /* main.png */,
+				890C29B3183A279A0068E0D9 /* Effects */,
 				89DC0CC2182E404F007F3384 /* Test.atlas */,
 			);
 			path = Resources;
@@ -183,23 +228,13 @@
 		89DC0CB1182E3D15007F3384 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				895210891836587E0046F123 /* Game */,
 				89DC0CB5182E3F86007F3384 /* AppDelegate.h */,
 				89DC0CB6182E3F86007F3384 /* AppDelegate.m */,
-				895210811834BB240046F123 /* Common.h */,
 				895210821834BB8F0046F123 /* DisplayView.h */,
 				895210831834BB8F0046F123 /* DisplayView.m */,
-				895210861834FBB00046F123 /* GameObjectManager.h */,
-				895210871834FBB00046F123 /* GameObjectManager.m */,
-				896FADDB1830EE3100AD2DF1 /* GameScene.h */,
-				896FADDC1830EE3100AD2DF1 /* GameScene.m */,
-				89DC0CB7182E3F86007F3384 /* GameView.h */,
-				89DC0CB8182E3F86007F3384 /* GameView.m */,
-				89B882261833687F008DE700 /* TouchView.h */,
-				89B882271833687F008DE700 /* TouchView.m */,
 				89DC0CBB182E3F86007F3384 /* ViewController.h */,
 				89DC0CBC182E3F86007F3384 /* ViewController.m */,
-				89DC0CC4182E4BBB007F3384 /* VirtualHID.h */,
-				89DC0CC5182E4BBB007F3384 /* VirtualHID.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -211,10 +246,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 89DC0C62182CC072007F3384 /* Build configuration list for PBXNativeTarget "sss" */;
 			buildPhases = (
+				895210851834CA280046F123 /* Run Script */,
 				89DC0C25182CC072007F3384 /* Sources */,
 				89DC0C26182CC072007F3384 /* Frameworks */,
 				89DC0C27182CC072007F3384 /* Resources */,
-				895210851834CA280046F123 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -281,9 +316,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				890C29B11839F0380068E0D9 /* spark.png in Resources */,
+				89D227EE183CA9B300FD45C0 /* main.png in Resources */,
 				89DC0C39182CC072007F3384 /* InfoPlist.strings in Resources */,
 				89DC0CC3182E404F007F3384 /* Test.atlas in Resources */,
+				890C29B5183A27DE0068E0D9 /* jet.sks in Resources */,
 				89DC0C4C182CC072007F3384 /* Images.xcassets in Resources */,
+				890C29B01839F0380068E0D9 /* bomb.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,18 +337,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		895210851834CA280046F123 /* ShellScript */ = {
+		895210851834CA280046F123 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "";
+			shellScript = "echo \"HOGE\" > hoge.txt\nrake";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -319,11 +359,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				895210841834BB8F0046F123 /* DisplayView.m in Sources */,
+				89D227F1183CB47300FD45C0 /* GameUtil.m in Sources */,
 				895210881834FBB00046F123 /* GameObjectManager.m in Sources */,
-				89DC0CC6182E4BBB007F3384 /* VirtualHID.m in Sources */,
+				89DC0CC6182E4BBB007F3384 /* GameHID.m in Sources */,
 				89DC0CBE182E3F86007F3384 /* GameView.m in Sources */,
 				896FADDD1830EE3100AD2DF1 /* GameScene.m in Sources */,
-				89B882281833687F008DE700 /* TouchView.m in Sources */,
+				89B882281833687F008DE700 /* GameTouchView.m in Sources */,
 				89DC0CBD182E3F86007F3384 /* AppDelegate.m in Sources */,
 				89DC0C3B182CC072007F3384 /* main.m in Sources */,
 				89DC0CC0182E3F86007F3384 /* ViewController.m in Sources */,

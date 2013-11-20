@@ -1,13 +1,4 @@
-//
-//  ObjectManager.h
-//  sss
-//
-//  Created by Kanaya Fumihiro on 2013/11/14.
-//  Copyright (c) 2013年 alwaystesting. All rights reserved.
-//
-
-#import <Foundation/Foundation.h>
-//#import "GameScene.h"
+#import "GameCommon.h"
 @class GameObjectManager;
 @class GameScene;
 
@@ -41,7 +32,12 @@
 
 
 
+@interface PlayerShot : GameObject {
+    SKSpriteNode* _sprite;
+}
+@end
 
-
-@interface Player : GameObject
+@interface Player : GameObject {
+    SKSpriteNode* _sprite;
+}
 @end

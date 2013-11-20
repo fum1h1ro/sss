@@ -1,11 +1,10 @@
 // vim: fenc=utf-8
 
-#import "Common.h"
 #import "ViewController.h"
-#import "TouchView.h"
+#import "GameTouchView.h"
 #import "GameView.h"
 #import "GameScene.h"
-#import "VirtualHID.h"
+#import "GameHID.h"
 #import "DisplayView.h"
 
 #define kSCREEN_WIDTH_35INCH 320
@@ -36,17 +35,20 @@
         NS_LOG(@"16:9");
         _isInch4 = YES;
     }
-    self.view = [[TouchView alloc] initWithFrame:screenrc];
-    self.view.backgroundColor = [UIColor redColor];
+    // メインのビューとしてGameTouchViewを生成する
+    self.view = [[GameTouchView alloc] initWithFrame:screenrc];
+    // ゲームビュー
     CGRect gamerc = [self makeGameViewRect];
     self.gameView = [[GameView alloc] initWithFrame:gamerc];
     [self.view addSubview:self.gameView];
 #ifdef USE_DISPLAY_VIEW
+    // 擬似的に低解像度にするためのビュー（テスト中）
     DisplayView* dv = [[DisplayView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     [self.view addSubview:dv];
 #endif
     // 
-    [VirtualHID shared];
+    [GameHID shared];
+    // 4inchの機種ならば、額縁追加
     if (_isInch4) {
         CGRect framerc = [self makeFrameViewRect];
         self.frameView = [[UIView alloc] initWithFrame:framerc];

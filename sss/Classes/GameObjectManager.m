@@ -1,14 +1,8 @@
-//
-//  ObjectManager.m
-//  sss
-//
-//  Created by Kanaya Fumihiro on 2013/11/14.
-//  Copyright (c) 2013年 alwaystesting. All rights reserved.
-//
-
 #import "GameView.h"
 #import "GameScene.h"
 #import "GameObjectManager.h"
+#import "GameHID.h"
+#import "GameUtil.h"
 
 @implementation GameObject
 //
@@ -57,6 +51,7 @@
         [obj update:dt];
         if (obj.isKill) {
             [_array removeObjectAtIndex:i];
+            --sz;
         } else {
             ++i;
         }
@@ -69,7 +64,20 @@
 
 
 
+@implementation PlayerShot
+//
+- (id)init {
+    if (self = [super init]) {
+        _updateFunction = @selector(updateInit:);
+    }
+    return self;
+}
 
+
+
+
+
+@end
 
 
 
@@ -86,24 +94,37 @@
 - (void)updateInit:(NSTimeInterval)dt {
     SKTextureAtlas* atlas = [SKTextureAtlas atlasNamed:@"Test"];
     SKTexture* base = [atlas textureNamed:@"sss"];
+    CGRect baserc = base.textureRect;
+    [GameUtil dumpCGRect:baserc];
     //SKTexture* base = [SKTexture textureWithImageNamed:@"sss"];
-    SKTexture* tex = [SKTexture textureWithRect:CGRectMake(0, 0.5f, 0.5f, 0.5f) inTexture:base];
-    base.filteringMode = SKTextureFilteringNearest;
-    tex.filteringMode = SKTextureFilteringNearest;
+    CGRect shiprc = [GameUtil recalcCGRect:CGRectMake(0, 0, 0.5f, 0.5f) inRect:baserc];
+    SKTexture* tex = [SKTexture textureWithRect:shiprc inTexture:base];
+    //base.filteringMode = SKTextureFilteringNearest;
+    //tex.filteringMode = SKTextureFilteringNearest;
     CGRect rc = [tex textureRect];
-    NS_LOG(@"%f %f %f %f", rc.origin.x, rc.origin.y, rc.size.width, rc.size.height);
-    SKSpriteNode* sprite = [SKSpriteNode spriteNodeWithTexture:base];
+    [GameUtil dumpCGRect:rc];
+    _sprite = [SKSpriteNode spriteNodeWithTexture:tex];
     //sprite.size = CGSizeMake(160, 160);
-    sprite.position = CGPointMake(160, 240);
+    _sprite.position = CGPointMake(160, 240);
     //SKAction *action = [SKAction rotateByAngle:M_PI duration:31];
     //[sprite runAction:[SKAction repeatActionForever:action]];
     //tex.textureRect = CGRectMake(0, 0, 0.5f, 0.5f);
-    [self.manager.scene addChild:sprite];
+    [self.manager.scene addChild:_sprite];
 
+    SKEmitterNode* emi = [GameScene createEmitterNode:@"jet"];
+    emi.zPosition = -100;
+    emi.position = CGPointMake(0, -10);
+    emi.targetNode = self.manager.scene;
+    [_sprite addChild:emi];
     _updateFunction = @selector(updateNormal:);
 }
 //
 - (void)updateNormal:(NSTimeInterval)dt {
+    CGPoint stick = [GameHID shared].leftStick;
+    CGPoint pos = _sprite.position;
+    pos.x += stick.x * 3.5f;
+    pos.y += stick.y * 3.5f;
+    _sprite.position = pos;
 }
 
 
