@@ -2,22 +2,12 @@
 @class GameObjectManager;
 @class GameScene;
 
-#define kGAME_OBJECT_DEFAULT_PRIORITY 1000
-@interface GameObject : NSObject {
-    SEL _updateFunction;
-}
-@property (strong, nonatomic) GameObjectManager* manager;
-@property (assign, nonatomic) s32 priority;
-@property (assign, readonly, nonatomic) BOOL isKill;
-- (void)update:(NSTimeInterval)dt;
-- (void)setKill;
-@end
-
 @interface GameObjectManager : NSObject {
-    BOOL _needsSort;
 }
 @property (strong, nonatomic) GameScene* scene;
-@property (strong, nonatomic) NSMutableArray* array;
+@property (strong, nonatomic) NSMutableArray* active;
+@property (strong, nonatomic) NSMutableArray* newbie;
+@property (strong, nonatomic) NSMutableIndexSet* remove;
 - (id)initWithScene:(GameScene*)scene;
 - (void)addGameObject:(GameObject*)obj;
 - (void)updateAllGameObject:(NSTimeInterval)dt;
@@ -34,10 +24,18 @@
 
 @interface PlayerShot : GameObject {
     SKSpriteNode* _sprite;
+    f32 _speed;
 }
+- (id)initWithPos:(CGPoint)pos dir:(f32)dir speed:(f32)speed;
 @end
 
 @interface Player : GameObject {
+    SKSpriteNode* _sprite;
+    f32 _reload;
+}
+@end
+
+@interface Enemy : GameObject {
     SKSpriteNode* _sprite;
 }
 @end

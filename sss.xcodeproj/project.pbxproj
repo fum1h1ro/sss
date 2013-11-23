@@ -16,6 +16,8 @@
 		89B882281833687F008DE700 /* GameTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B882271833687F008DE700 /* GameTouchView.m */; };
 		89D227EE183CA9B300FD45C0 /* main.png in Resources */ = {isa = PBXBuildFile; fileRef = 89D227ED183CA9B300FD45C0 /* main.png */; };
 		89D227F1183CB47300FD45C0 /* GameUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D227F0183CB47300FD45C0 /* GameUtil.m */; };
+		89D227F5183CC1D200FD45C0 /* GameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D227F4183CC1D200FD45C0 /* GameObject.m */; };
+		89D227F8183CDB7D00FD45C0 /* GameCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D227F7183CDB7D00FD45C0 /* GameCamera.m */; };
 		89DC0C2D182CC072007F3384 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DC0C2C182CC072007F3384 /* Foundation.framework */; };
 		89DC0C2F182CC072007F3384 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DC0C2E182CC072007F3384 /* CoreGraphics.framework */; };
 		89DC0C31182CC072007F3384 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DC0C30182CC072007F3384 /* UIKit.framework */; };
@@ -62,6 +64,10 @@
 		89D227EF183CB47300FD45C0 /* GameUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameUtil.h; sourceTree = "<group>"; };
 		89D227F0183CB47300FD45C0 /* GameUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameUtil.m; sourceTree = "<group>"; };
 		89D227F2183CBD3E00FD45C0 /* Game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		89D227F3183CC1D200FD45C0 /* GameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
+		89D227F4183CC1D200FD45C0 /* GameObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameObject.m; sourceTree = "<group>"; };
+		89D227F6183CDB7D00FD45C0 /* GameCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCamera.h; sourceTree = "<group>"; };
+		89D227F7183CDB7D00FD45C0 /* GameCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCamera.m; sourceTree = "<group>"; };
 		89DC0C29182CC072007F3384 /* sss.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sss.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89DC0C2C182CC072007F3384 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		89DC0C2E182CC072007F3384 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -140,6 +146,10 @@
 				89D227F0183CB47300FD45C0 /* GameUtil.m */,
 				89DC0CB7182E3F86007F3384 /* GameView.h */,
 				89DC0CB8182E3F86007F3384 /* GameView.m */,
+				89D227F3183CC1D200FD45C0 /* GameObject.h */,
+				89D227F4183CC1D200FD45C0 /* GameObject.m */,
+				89D227F6183CDB7D00FD45C0 /* GameCamera.h */,
+				89D227F7183CDB7D00FD45C0 /* GameCamera.m */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -349,7 +359,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"HOGE\" > hoge.txt\nrake";
+			shellScript = rake;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -360,10 +370,12 @@
 			files = (
 				895210841834BB8F0046F123 /* DisplayView.m in Sources */,
 				89D227F1183CB47300FD45C0 /* GameUtil.m in Sources */,
+				89D227F8183CDB7D00FD45C0 /* GameCamera.m in Sources */,
 				895210881834FBB00046F123 /* GameObjectManager.m in Sources */,
 				89DC0CC6182E4BBB007F3384 /* GameHID.m in Sources */,
 				89DC0CBE182E3F86007F3384 /* GameView.m in Sources */,
 				896FADDD1830EE3100AD2DF1 /* GameScene.m in Sources */,
+				89D227F5183CC1D200FD45C0 /* GameObject.m in Sources */,
 				89B882281833687F008DE700 /* GameTouchView.m in Sources */,
 				89DC0CBD182E3F86007F3384 /* AppDelegate.m in Sources */,
 				89DC0C3B182CC072007F3384 /* main.m in Sources */,

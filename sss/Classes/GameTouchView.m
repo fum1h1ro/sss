@@ -23,10 +23,12 @@ static GameTouchView* instance = nil;
 //
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
     _isHolding = YES;
+    NSTimeInterval timestamp;
     for (UITouch* touch in touches) {
         _touchPosition = [touch locationInView:self];
+        timestamp = touch.timestamp;
     }
-    [[GameHID shared] touchesBegan:_touchPosition];
+    [[GameHID shared] touchesBegan:_touchPosition withTimeStamp:timestamp];
     // 上位層にイベントを投げる
     [super touchesBegan:touches withEvent:event];
 }
@@ -36,18 +38,22 @@ static GameTouchView* instance = nil;
 }
 - (void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
     _isHolding = NO;
+    NSTimeInterval timestamp;
     for (UITouch* touch in touches) {
         _touchPosition = [touch locationInView:self];
+        timestamp = touch.timestamp;
     }
-    [[GameHID shared] touchesEnded:_touchPosition];
+    [[GameHID shared] touchesEnded:_touchPosition withTimeStamp:timestamp];
     [super touchesEnded:touches withEvent:event];
 }
 - (void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {
     _isHolding = YES;
+    NSTimeInterval timestamp;
     for (UITouch* touch in touches) {
         _touchPosition = [touch locationInView:self];
+        timestamp = touch.timestamp;
     }
-    [[GameHID shared] touchesMoved:_touchPosition];
+    [[GameHID shared] touchesMoved:_touchPosition withTimeStamp:timestamp];
     [super touchesMoved:touches withEvent:event];
 }
 /*

@@ -46,6 +46,8 @@ typedef double f64;
 #   endif
 #endif
 
-
+#define GAME_PI ((f32)M_PI)
+#define GAME_R2D(r) ((180.0f/GAME_PI)*(r))
+#define GAME_D2R(r) ((GAME_PI/180.0f)*(r))
 
 #endif

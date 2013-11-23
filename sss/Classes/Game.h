@@ -15,6 +15,7 @@
 #import "GameTouchView.h"
 #import "GameHID.h"
 #import "GameScene.h"
+#import "GameObject.h"
 #import "GameObjectManager.h"
 
 #endif
