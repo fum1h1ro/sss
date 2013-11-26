@@ -42,3 +42,43 @@
     _previousTime = now;
 }
 @end
+
+
+// インスタンスを予め確保しておき、必要な時に貸し出す
+// このままだと、NSObjectを返すので、必要なクラスを生成するように継承先で書き換える
+@implementation GameInstancePool
+@dynamic available;
+//
+- (id)initWithNumOfStock:(u32)num {
+    if (self = [super init]) {
+        _size = num;
+        _pool = [NSMutableArray arrayWithCapacity:num];
+        for (u32 i = 0; i < num; ++i) {
+            [_pool addObject:[self createInstance]];
+        }
+    }
+    return self;
+}
+// ここをオーバーライドする
+- (id)createInstance {
+    return [[NSObject alloc] init];
+}
+//
+- (id)allocInstance {
+    u32 num = [_pool count];
+    if (num > 0) {
+        id item = _pool[num-1];
+        [_pool removeLastObject];
+        return item;
+    }
+    return nil;
+}
+//
+- (void)releaseInstance:(id)ins {
+    [_pool addObject:ins];
+}
+//
+- (u32)available {
+    return [_pool count];
+}
+@end

@@ -13,3 +13,15 @@
 + (GameTimer*)shared;
 - (void)update:(NSTimeInterval)now;
 @end
+//
+@interface GameInstancePool : NSObject {
+    NSMutableArray* _pool;
+    u32 _size, _available;
+}
+@property (assign, nonatomic, readonly) u32 size;
+@property (assign, nonatomic, readonly) u32 available;
+- (id)initWithNumOfStock:(u32)num;
+- (id)createInstance;
+- (id)allocInstance;
+- (id)releaseInstance;
+@end

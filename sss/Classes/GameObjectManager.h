@@ -11,6 +11,8 @@
 - (id)initWithScene:(GameScene*)scene;
 - (void)addGameObject:(GameObject*)obj;
 - (void)updateAllGameObject:(NSTimeInterval)dt;
+- (void)didEvaluateActions;
+- (void)didSimulatePhysics;
 @end
 
 
@@ -29,6 +31,12 @@
 - (id)initWithPos:(CGPoint)pos dir:(f32)dir speed:(f32)speed;
 @end
 
+@interface PlayerShotEffect : GameObject {
+    SKEmitterNode* _emitter;
+}
+- (id)initWithPos:(CGPoint)pos dir:(f32)dir;
+@end
+
 @interface Player : GameObject {
     SKSpriteNode* _sprite;
     f32 _reload;
@@ -37,5 +45,6 @@
 
 @interface Enemy : GameObject {
     SKSpriteNode* _sprite;
+    CGFloat _damage;
 }
 @end

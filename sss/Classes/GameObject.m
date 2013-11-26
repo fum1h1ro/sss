@@ -8,6 +8,7 @@
 
 #import "GameCommon.h"
 #import "GameObject.h"
+#import "GameUtil.h"
 #import <objc/message.h>
 
 @implementation GameObject {
@@ -28,6 +29,10 @@
     return self;
 }
 //
+- (void)resetAsNewbie {
+    _lifeTime = 0;
+}
+//
 - (void)updateWithManager:(GameObjectManager*)manager {
     if (_updateFunction) {
         //[self performSelector:_updateFunction withObject:manager]; // この書き方だと、コンパイラの警告が出る（支障はないっぽいが
@@ -35,6 +40,7 @@
         objc_msgSend(self, _updateFunction, manager);
         _isUpdateFirst = NO;
     }
+    _lifeTime += [GameTimer shared].deltaTime;
 }
 //
 - (void)removeReservation {

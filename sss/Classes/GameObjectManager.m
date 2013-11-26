@@ -22,8 +22,11 @@
     return self;
 }
 // ゲームオブジェクトを追加する
+// ここで追加されたゲームオブジェクトは、次のフレーム（updateAllGameObject:）から処理されるようになる
 - (void)addGameObject:(GameObject*)obj {
     [_newbie addObject:obj];
+    obj.manager = self;
+    [obj resetAsNewbie]; // リセットされる
 }
 // 全てのゲームオブジェクトを更新する
 - (void)updateAllGameObject:(NSTimeInterval)dt {
@@ -36,8 +39,10 @@
     u32 idx = 0;
     for (GameObject* obj in _active) {
         [obj updateWithManager:self];
+        // 削除要求が来ていたら、削除リストに追加しておく
         if (obj.isRemove) {
             [obj willRemove];
+            obj.manager = nil;
             [_remove addIndex:idx];
         }
         ++idx;
@@ -46,6 +51,20 @@
     if ([_remove count] > 0) {
         [_active removeObjectsAtIndexes:_remove];
         [_remove removeAllIndexes];
+    }
+}
+// アクション計算後に呼ばれる（あまり必要でない気がする。アクション使わないので）
+- (void)didEvaluateActions {
+    for (GameObject* obj in _active) {
+        if ([obj respondsToSelector:@selector(didEvaluateActions)])
+            [obj performSelector:@selector(didEvaluateActions)];
+    }
+}
+// 物理シミュ終了時に呼ばれる
+- (void)didSimulatePhysics {
+    for (GameObject* obj in _active) {
+        if ([obj respondsToSelector:@selector(didSimulatePhysics)])
+            [obj performSelector:@selector(didSimulatePhysics)];
     }
 }
 @end
@@ -108,13 +127,45 @@
 //
 - (void)didBeginContact:(SKPhysicsContact*)contact with:(GameObject*)other {
     [self removeReservation];
-    _sprite.physicsBody.collisionBitMask = 0x0;
-    _sprite.physicsBody = nil;
+    PlayerShotEffect* eff = [[PlayerShotEffect alloc] initWithPos:contact.contactPoint dir:_rotation];
+    [_manager addGameObject:eff];
 }
 
 
 
 
+@end
+
+@implementation PlayerShotEffect
+//
+- (id)initWithPos:(CGPoint)pos dir:(f32)dir {
+    if (self = [super init]) {
+        self.updateFunction = @selector(updateInit:);
+        _emitter = [GameScene createEmitterNode:@"reflect"];
+        _emitter.zPosition = +100;
+        _emitter.position = pos;
+        //NS_LOG(@"%d", _emitter.numParticlesToEmit);
+    }
+    return self;
+}
+//
+- (void)updateInit:(GameObjectManager*)manager {
+    _emitter.targetNode = _manager.scene;//.camera;
+    //[manager.scene/*.camera*/ addChild:_emitter];
+    [manager.scene/*.camera*/ insertChild:_emitter atIndex:0];
+    self.updateFunction = @selector(updateNormal:);
+}
+//
+- (void)updateNormal:(GameObjectManager*)manager {
+    if (_emitter.numParticlesToEmit == 0) {
+        [self removeReservation];
+        return;
+    }
+}
+//
+- (void)willRemove {
+    [_emitter removeFromParent];
+}
 @end
 
 
@@ -147,6 +198,10 @@
         _sprite.zPosition = 10;
     }
     return self;
+}
+//
+- (void)resetAsNewbie {
+    [super resetAsNewbie];
 }
 //
 - (void)updateInit:(GameObjectManager*)manager {
@@ -209,6 +264,8 @@
         _sprite.physicsBody.collisionBitMask = 0xffffffff;
         _sprite.physicsBody.categoryBitMask = 0xffffffff;
         _sprite.physicsBody.contactTestBitMask = 0xffffffff;
+        //
+        _sprite.color = [SKColor blueColor];
     }
     return self;
 }
@@ -228,12 +285,17 @@
 //
 - (void)updateNormal:(GameObjectManager*)manager {
     _sprite.position = CGPointMake(80, 220);
+    _sprite.colorBlendFactor = _damage;
+    _damage *= 0.8f;
 }
 //
 - (void)didBeginContact:(SKPhysicsContact*)contact with:(GameObject*)other {
+    _damage = 1.0f;
+}
+//
+- (void)didSimulatePhysics {
     _sprite.position = CGPointMake(80, 220);
 }
-
 
 
 @end

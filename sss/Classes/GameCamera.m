@@ -13,7 +13,7 @@
 //
 - (void)update {
     CGPoint pos;
-    pos.x = -30;//-_target.x;
+    pos.x = -_target.x;
     pos.y = -_target.y;
     self.position = pos;
     self.zRotation = -_twist;

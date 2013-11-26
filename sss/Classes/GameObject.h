@@ -11,15 +11,20 @@
 
 #define kGameObjectDefaultPriority 1000
 @interface GameObject : NSObject {
+    GameObjectManager* _manager;
     CGPoint _position;
     CGFloat _rotation;
+    NSTimeInterval lifeTime;
 }
+@property (strong, nonatomic) GameObjectManager* manager;
+@property (assign, nonatomic) CGPoint position;
+@property (assign, nonatomic) CGFloat rotation;
+@property (assign, readonly, nonatomic) NSTimeInterval lifeTime;
 @property (assign, nonatomic) s32 priority;
 @property (assign, readonly, nonatomic) BOOL isUpdateFirst;
 @property (assign, readonly, nonatomic) BOOL isRemove;
 @property (assign, nonatomic) SEL updateFunction;
-@property (assign, nonatomic) CGPoint position;
-@property (assign, nonatomic) CGFloat rotation;
+- (void)resetAsNewbie;
 - (void)updateWithManager:(GameObjectManager*)manager;
 - (void)removeReservation;
 - (BOOL)isVisible:(SKNode*)node;

@@ -42,6 +42,14 @@
 #endif
 }
 //
+- (void)didEvaluateActions {
+    [_objectManager didEvaluateActions];
+}
+//
+- (void)didSimulatePhysics {
+    [_objectManager didSimulatePhysics];
+}
+//
 + (SKEmitterNode*)createEmitterNode:(NSString*)name {
     NSString* path = [[NSBundle mainBundle] pathForResource:name ofType:@"sks"];
     SKEmitterNode* node = [NSKeyedUnarchiver unarchiveObjectWithFile:path];

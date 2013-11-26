@@ -1,0 +1,24 @@
+# vim: fenc=utf-8
+RUBY = 'ruby'
+TMXCONV_RB = "#{RUBY} Tools/tmxconv.rb"
+RESSRC_DIR = 'Resources.src'
+RESOUT_DIR = 'Resources'
+
+srcfiles = FileList["#{RESSRC_DIR}/*.tmx"]
+dstfiles = srcfiles.pathmap("#{RESOUT_DIR}/%n.tmxbin")
+
+
+
+
+
+task :default => :build
+task :check do
+  p srcfiles
+  p dstfiles
+end
+desc 'convert .tmx file'
+task :build => dstfiles
+
+rule /#{RESOUT_DIR}\/.+(\.tmxbin)/ => ["#{RESSRC_DIR}/%n.tmx"] do |t|
+  sh "#{TMXCONV_RB} #{t.prerequisites.first} -o #{t.name}"
+end
