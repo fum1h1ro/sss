@@ -31,5 +31,6 @@
 - (void)willRemove;
 - (void)didBeginContact:(SKPhysicsContact*)contact with:(GameObject*)other;
 - (void)didEndContact:(SKPhysicsContact*)contact with:(GameObject*)other;
+- (void)applyPosture:(SKNode*)node;
 @end
 

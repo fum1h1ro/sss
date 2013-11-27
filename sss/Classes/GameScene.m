@@ -21,11 +21,6 @@
         //self.xScale = 0.5f;
         //self.position = CGPointMake(40, 0);
         self.physicsWorld.contactDelegate = self;
-
-        Player* player = [[Player alloc] init];
-        [_objectManager addGameObject:player];
-        Enemy* enemy = [[Enemy alloc] init];
-        [_objectManager addGameObject:enemy];
     }
     return self;
 }
@@ -33,13 +28,21 @@
 - (void)update:(NSTimeInterval)dt {
     [[GameTimer shared] update:dt];
     [[GameHID shared] update];
+    [self beforeObjectUpdate];
     [_objectManager updateAllGameObject:dt];
     [_camera update];
+    [self afterObjectUpdate];
 #ifdef USE_DISPLAY_VIEW
     UIView* view = [self.view snapshotViewAfterScreenUpdates:NO];
     [DisplayView shared].view = view;
     [[DisplayView shared] setNeedsDisplay];
 #endif
+}
+//
+- (void)beforeObjectUpdate {
+}
+//
+- (void)afterObjectUpdate {
 }
 //
 - (void)didEvaluateActions {

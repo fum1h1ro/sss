@@ -107,6 +107,7 @@
 - (void)updateInit:(GameObjectManager*)manager {
     [manager.scene.camera addChild:_sprite];
     self.updateFunction = @selector(updateNormal:);
+    [self applyPosture:_sprite];
 }
 //
 - (void)updateNormal:(GameObjectManager*)manager {
@@ -117,8 +118,7 @@
     f32 speed = _speed * [GameTimer shared].deltaTime;
     _position.x += cosf(_rotation) * speed;
     _position.y += sinf(_rotation) * speed;
-    _sprite.position = _position;
-    _sprite.zRotation = _rotation;
+    [self applyPosture:_sprite];
 }
 //
 - (void)willRemove {
@@ -136,15 +136,27 @@
 
 @end
 
+static Player* player = nil;
 @implementation PlayerShotEffect
 //
 - (id)initWithPos:(CGPoint)pos dir:(f32)dir {
     if (self = [super init]) {
         self.updateFunction = @selector(updateInit:);
+#if 0
         _emitter = [GameScene createEmitterNode:@"reflect"];
         _emitter.zPosition = +100;
         _emitter.position = pos;
+        [_emitter resetSimulation];
         //NS_LOG(@"%d", _emitter.numParticlesToEmit);
+#else
+        _emitter = [player.revolver hireInstance];
+        if (_emitter.parent)
+            [_emitter removeFromParent];
+        _emitter.zPosition = +100;
+        _emitter.position = pos;
+        [_emitter resetSimulation];
+        //NS_LOG(@"%d", _emitter.numParticlesToEmit);
+#endif
     }
     return self;
 }
@@ -164,12 +176,15 @@
 }
 //
 - (void)willRemove {
-    [_emitter removeFromParent];
+    //[_emitter removeFromParent];
 }
 @end
 
-
-
+@implementation PlayerShotEffectRevolver
+- (id)createInstance {
+    return [GameScene createEmitterNode:@"reflect"];
+}
+@end
 
 @implementation Player
 //
@@ -196,6 +211,11 @@
         //sprite.size = CGSizeMake(160, 160);
         _sprite.position = CGPointMake(80, 120);
         _sprite.zPosition = 10;
+
+
+
+        _revolver = [[PlayerShotEffectRevolver alloc] initWithNumOfStock:8];
+        player = self;
     }
     return self;
 }
@@ -226,7 +246,8 @@
     _sprite.position = pos;
     _reload -= [GameTimer shared].deltaTime;
     if ([GameHID shared].isTouch && _reload <= 0.0f) {
-        [self shoot:GAME_D2R(90) speed:300 manager:manager];
+		[self shootWithOffset:CGPointMake(-4, +8) dir:GAME_D2R(90) speed:300 manager:manager];
+		[self shootWithOffset:CGPointMake(+4, +8) dir:GAME_D2R(90) speed:300 manager:manager];
         //[self shoot:GAME_D2R(90-30) speed:300 manager:manager];
         //[self shoot:GAME_D2R(90+30) speed:300 manager:manager];
         //[self shoot:GAME_D2R(270-30) speed:300 manager:manager];
@@ -235,8 +256,10 @@
     }
 }
 //
-- (void)shoot:(f32)dir speed:(f32)speed manager:(GameObjectManager*)manager {
-    PlayerShot* shot = [[PlayerShot alloc] initWithPos:_sprite.position dir:dir speed:speed];
+- (void)shootWithOffset:(CGPoint)ofs dir:(f32)dir speed:(f32)speed manager:(GameObjectManager*)manager {
+	ofs.x += _sprite.position.x;
+	ofs.y += _sprite.position.y;
+    PlayerShot* shot = [[PlayerShot alloc] initWithPos:ofs dir:dir speed:speed];
     [manager addGameObject:shot];
 }
 

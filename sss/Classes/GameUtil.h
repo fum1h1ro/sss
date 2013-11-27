@@ -25,3 +25,13 @@
 - (id)allocInstance;
 - (id)releaseInstance;
 @end
+//
+@interface GameInstanceRevolver : NSObject {
+    NSMutableArray* _pool;
+    u32 _size, _index;
+}
+@property (assign, nonatomic, readonly) u32 size;
+- (id)initWithNumOfStock:(u32)num;
+- (id)createInstance;
+- (id)hireInstance;
+@end

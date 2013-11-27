@@ -82,3 +82,32 @@
     return [_pool count];
 }
 @end
+// インスタンスを予め確保しておき、必要な時に貸し出す
+// このままだと、NSObjectを返すので、必要なクラスを生成するように継承先で書き換える
+// GameInstancePoolとの違いは、貸し出したものはこのクラスの中にとどまり続ける
+// 順番に貸し出され、一周したらまた貸し出される
+@implementation GameInstanceRevolver
+//
+- (id)initWithNumOfStock:(u32)num {
+    if (self = [super init]) {
+        _size = num;
+        _pool = [NSMutableArray arrayWithCapacity:num];
+        for (u32 i = 0; i < num; ++i) {
+            [_pool addObject:[self createInstance]];
+        }
+    }
+    return self;
+}
+// ここをオーバーライドする
+- (id)createInstance {
+    return [[NSObject alloc] init];
+}
+//
+- (id)hireInstance {
+    id obj = _pool[_index];
+    if ((_index += 1) >= _size) {
+        _index = 0;
+    }
+    return obj;
+}
+@end

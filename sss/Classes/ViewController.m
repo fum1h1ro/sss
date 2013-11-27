@@ -6,6 +6,8 @@
 #import "GameScene.h"
 #import "GameHID.h"
 #import "DisplayView.h"
+#import "SceneTitle.h"
+#import "SceneMain.h"
 
 #define kSCREEN_WIDTH_35INCH 320
 #define kSCREEN_HEIGHT_35INCH 480
@@ -60,7 +62,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Create and configure the scene.
-    GameScene* scene = [[GameScene alloc] init];
+    //SceneTitle* scene = [[SceneTitle alloc] init];
+    SceneMain* scene = [[SceneMain alloc] init];
     // Present the scene.
     [self.gameView presentScene:scene];
 }

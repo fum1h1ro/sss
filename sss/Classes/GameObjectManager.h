@@ -1,4 +1,5 @@
 #import "GameCommon.h"
+#import "GameUtil.h"
 @class GameObjectManager;
 @class GameScene;
 
@@ -37,10 +38,14 @@
 - (id)initWithPos:(CGPoint)pos dir:(f32)dir;
 @end
 
+@interface PlayerShotEffectRevolver : GameInstanceRevolver
+@end
+
 @interface Player : GameObject {
     SKSpriteNode* _sprite;
     f32 _reload;
 }
+@property (strong, readonly, nonatomic) PlayerShotEffectRevolver* revolver;
 @end
 
 @interface Enemy : GameObject {

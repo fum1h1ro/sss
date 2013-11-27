@@ -1,11 +1,4 @@
-//
-//  GameObject.m
-//  sss
-//
-//  Created by Kanaya Fumihiro on 2013/11/20.
-//  Copyright (c) 2013年 alwaystesting. All rights reserved.
-//
-
+// vim: fenc=utf-8
 #import "GameCommon.h"
 #import "GameObject.h"
 #import "GameUtil.h"
@@ -60,5 +53,10 @@
 }
 //
 - (void)didEndContact:(SKPhysicsContact*)contact with:(GameObject*)other {
+}
+//
+- (void)applyPosture:(SKNode*)node {
+    node.position = _position;
+    node.zRotation = _rotation;
 }
 @end

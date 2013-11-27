@@ -42,7 +42,7 @@ class TmxFile
     end
   end
   def read_image(elem)
-    @image = elem.attributes['source']
+    @image = File.basename(elem.attributes['source'], '.*')
   end
   # 各タイルのプロパティをHashで保存しておく
   def read_tile_property(elem)
@@ -77,7 +77,9 @@ class TmxFile
     bin
   end
   def gen_header
-    ['TMX0', VERSION, @map_width, @map_height, @tile_width, @tile_height].pack('Z4ISSSS')
+    bin = ['TMX0', VERSION, @map_width, @map_height, @tile_width, @tile_height].pack('Z4ISSSS')
+    bin += [@image[0, 15], 0].pack('Z15c')
+    bin
   end
   def gen_tiles
     bin = ''
