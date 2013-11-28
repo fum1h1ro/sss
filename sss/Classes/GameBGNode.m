@@ -18,10 +18,11 @@
 
 @implementation GameBGNode
 //
-- (id)initWithTMXFile:(NSString*)path {
+- (id)initWithTMXFile:(NSString*)path width:(u32)width height:(u32)height {
     if (self = [super init]) {
         NS_LOG(@"%@", path);
-        _screen_width = _screen_height = 8;
+        _screen_width = width;
+        _screen_height = height;
         _tmxbin = [NSData dataWithContentsOfFile:path];
         if (_tmxbin) {
             [self parseTMX];

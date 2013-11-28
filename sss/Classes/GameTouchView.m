@@ -1,6 +1,5 @@
 // vim: fenc=utf-8
 #import "GameTouchView.h"
-#import "ViewController.h"
 #import "GameHID.h"
 
 static GameTouchView* instance = nil;

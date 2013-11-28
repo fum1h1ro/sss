@@ -240,14 +240,14 @@ static Player* player = nil;
 - (void)updateNormal:(GameObjectManager*)manager {
     CGPoint stick = [GameHID shared].leftStick;
     CGPoint pos = _sprite.position;
-    f32 speed = 100.0f * [GameTimer shared].deltaTime;
+    f32 speed = 200.0f * [GameTimer shared].deltaTime;
     pos.x += stick.x * speed;
     pos.y += stick.y * speed;
     _sprite.position = pos;
     _reload -= [GameTimer shared].deltaTime;
     if ([GameHID shared].isTouch && _reload <= 0.0f) {
-		[self shootWithOffset:CGPointMake(-4, +8) dir:GAME_D2R(90) speed:300 manager:manager];
-		[self shootWithOffset:CGPointMake(+4, +8) dir:GAME_D2R(90) speed:300 manager:manager];
+		[self shootWithOffset:CGPointMake(-4, +8) dir:GAME_D2R(90) speed:500 manager:manager];
+		[self shootWithOffset:CGPointMake(+4, +8) dir:GAME_D2R(90) speed:500 manager:manager];
         //[self shoot:GAME_D2R(90-30) speed:300 manager:manager];
         //[self shoot:GAME_D2R(90+30) speed:300 manager:manager];
         //[self shoot:GAME_D2R(270-30) speed:300 manager:manager];

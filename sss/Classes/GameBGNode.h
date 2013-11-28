@@ -25,7 +25,7 @@ typedef struct {
     __strong SKSpriteNode** _nodes;
     __strong SKTexture** _patterns;
 }
-- (id)initWithTMXFile:(NSString*)path;
+- (id)initWithTMXFile:(NSString*)path width:(u32)width height:(u32)height;
 @property (assign, nonatomic) CGPoint targetPosition;
 @property (assign, nonatomic) CGPoint nodeCenter;
 - (void)updateNodes;

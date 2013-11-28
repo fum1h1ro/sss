@@ -15,17 +15,22 @@
         [_objectManager addGameObject:player];
         Enemy* enemy = [[Enemy alloc] init];
         [_objectManager addGameObject:enemy];
-        _bg = [[GameBGNode alloc] initWithTMXFile:[[NSBundle mainBundle] pathForResource:@"stage" ofType:@"tmxbin"]];
+        NSString* path = [[NSBundle mainBundle] pathForResource:@"stage" ofType:@"tmxbin"];
+        CGSize sz = self.size;
+        u32 w = (u32)(sz.width / 16.0f) + 1;
+        u32 h = (u32)(sz.height / 16.0f) + 1;
+        _bg = [[GameBGNode alloc] initWithTMXFile:path width:w height:h];
         [self addChild:_bg];
-        _bg.nodeCenter = CGPointMake(80, 120);
+        _bg.nodeCenter = CGPointMake(sz.width / 2.0f, sz.height / 2.0f);
+        _bg.targetPosition = CGPointMake(sz.width / 2.0f, 0);
         [_bg updateNodes];
     }
     return self;
 }
 - (void)beforeObjectUpdate {
-    static f32 r = 0.0f;
-    _bg.targetPosition = CGPointMake(192 + sin(r) * 30.0f, 8);
-    r += GAME_PI * 0.05f;
+    CGPoint pt = _bg.targetPosition;
+    pt.y += 0.1f;
+    _bg.targetPosition = pt;
     [_bg updateNodes];
 }
 @end

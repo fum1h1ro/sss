@@ -8,8 +8,8 @@
 @implementation GameScene
 - (id)init {
     CGSize size = CGSizeMake(320, 480);
-    size.width *= 0.5f;
-    size.height *= 0.5f;
+    //size.width *= 0.5f;
+    //size.height *= 0.5f;
     if (self = [super initWithSize:size]) {
         _objectManager = [[GameObjectManager alloc] initWithScene:self];
         _camera = [[GameCamera alloc] init];
