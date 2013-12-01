@@ -17,5 +17,6 @@
 #import "GameScene.h"
 #import "GameObject.h"
 #import "GameObjectManager.h"
+#import "GameBGNode.h"
 
 #endif

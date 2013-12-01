@@ -15,18 +15,29 @@ typedef struct {
     u16 work;
 } TMXTile;
 
+typedef NS_OPTIONS(u32, TMXTileOptions) {
+    TMXTileOptionsNeedsToCallDelegate = (1<<0),
+};
+
+@protocol GameBGNodeDelegate
+- (void)activateTile:(TMXTile*)tile;
+@end
+
 @interface GameBGNode : SKNode {
-    NSData* _tmxbin;
-    u32 _screen_width, _screen_height; // 表示用タイルを並べる大きさ
+    NSMutableData* _tmxbin;
+    u32 _screen_xcount, _screen_ycount; // 表示用タイルを並べる大きさ
     const TMXHeader* _header;
-    const TMXTile* _tiles;
+    TMXTile* _tiles;
     SKTexture* _texture;
     u32 _npattern, _pattern_column, _pattern_row;
     __strong SKSpriteNode** _nodes;
     __strong SKTexture** _patterns;
 }
-- (id)initWithTMXFile:(NSString*)path width:(u32)width height:(u32)height;
+- (id)initWithTMXFile:(NSString*)path size:(CGSize)sz;
 @property (assign, nonatomic) CGPoint targetPosition;
 @property (assign, nonatomic) CGPoint nodeCenter;
+@property (assign, nonatomic) CGSize screenSize;
+@property (assign, nonatomic) id<GameBGNodeDelegate> delegate;
 - (void)updateNodes;
 @end
+

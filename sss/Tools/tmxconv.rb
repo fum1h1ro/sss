@@ -95,7 +95,7 @@ class TmxFile
     bin
   end
   def gen_userdata(id)
-    0x00
+    0x01
   end
 
 

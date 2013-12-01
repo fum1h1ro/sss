@@ -10,6 +10,8 @@
 		890C29B01839F0380068E0D9 /* bomb.sks in Resources */ = {isa = PBXBuildFile; fileRef = 890C29AE1839F0380068E0D9 /* bomb.sks */; };
 		890C29B11839F0380068E0D9 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 890C29AF1839F0380068E0D9 /* spark.png */; };
 		890C29B5183A27DE0068E0D9 /* jet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 890C29B4183A27DE0068E0D9 /* jet.sks */; };
+		89280F05184B14F800ED3843 /* iOS-Application.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 89280F04184B14F800ED3843 /* iOS-Application.xcconfig */; };
+		89280F08184B4A6600ED3843 /* ScenePause.m in Sources */ = {isa = PBXBuildFile; fileRef = 89280F07184B4A6600ED3843 /* ScenePause.m */; };
 		89366FDA184215AD0005F941 /* reflect.sks in Resources */ = {isa = PBXBuildFile; fileRef = 89366FD9184215AD0005F941 /* reflect.sks */; };
 		89366FDC184325A80005F941 /* GameInstancePoolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89366FDB184325A80005F941 /* GameInstancePoolTests.m */; };
 		89500BDB1844CC7600968B6E /* stage.tmxbin in Resources */ = {isa = PBXBuildFile; fileRef = 89500BDA1844CC7600968B6E /* stage.tmxbin */; };
@@ -57,6 +59,9 @@
 		890C29AE1839F0380068E0D9 /* bomb.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = bomb.sks; sourceTree = "<group>"; };
 		890C29AF1839F0380068E0D9 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		890C29B4183A27DE0068E0D9 /* jet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = jet.sks; sourceTree = "<group>"; };
+		89280F04184B14F800ED3843 /* iOS-Application.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "iOS-Application.xcconfig"; path = "xcconfigs/iOS/iOS-Application.xcconfig"; sourceTree = SOURCE_ROOT; };
+		89280F06184B4A6600ED3843 /* ScenePause.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenePause.h; sourceTree = "<group>"; };
+		89280F07184B4A6600ED3843 /* ScenePause.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenePause.m; sourceTree = "<group>"; };
 		89366FD9184215AD0005F941 /* reflect.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = reflect.sks; sourceTree = "<group>"; };
 		89366FDB184325A80005F941 /* GameInstancePoolTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameInstancePoolTests.m; sourceTree = "<group>"; };
 		89500BDA1844CC7600968B6E /* stage.tmxbin */ = {isa = PBXFileReference; lastKnownFileType = file; path = stage.tmxbin; sourceTree = "<group>"; };
@@ -217,6 +222,7 @@
 		89DC0C35182CC072007F3384 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				89280F04184B14F800ED3843 /* iOS-Application.xcconfig */,
 				89DC0C36182CC072007F3384 /* sss-Info.plist */,
 				89DC0C37182CC072007F3384 /* InfoPlist.strings */,
 				89DC0C3A182CC072007F3384 /* main.m */,
@@ -269,6 +275,8 @@
 				89500BDD1845CFAC00968B6E /* SceneTitle.m */,
 				89500BDF1845D48100968B6E /* SceneMain.h */,
 				89500BE01845D48100968B6E /* SceneMain.m */,
+				89280F06184B4A6600ED3843 /* ScenePause.h */,
+				89280F07184B4A6600ED3843 /* ScenePause.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -355,6 +363,7 @@
 				89D227EE183CA9B300FD45C0 /* main.png in Resources */,
 				89DC0C39182CC072007F3384 /* InfoPlist.strings in Resources */,
 				89DC0CC3182E404F007F3384 /* Test.atlas in Resources */,
+				89280F05184B14F800ED3843 /* iOS-Application.xcconfig in Resources */,
 				890C29B5183A27DE0068E0D9 /* jet.sks in Resources */,
 				89DC0C4C182CC072007F3384 /* Images.xcassets in Resources */,
 				890C29B01839F0380068E0D9 /* bomb.sks in Resources */,
@@ -397,6 +406,7 @@
 				895210841834BB8F0046F123 /* DisplayView.m in Sources */,
 				89D227F1183CB47300FD45C0 /* GameUtil.m in Sources */,
 				89D227F8183CDB7D00FD45C0 /* GameCamera.m in Sources */,
+				89280F08184B4A6600ED3843 /* ScenePause.m in Sources */,
 				895210881834FBB00046F123 /* GameObjectManager.m in Sources */,
 				89DC0CC6182E4BBB007F3384 /* GameHID.m in Sources */,
 				89DC0CBE182E3F86007F3384 /* GameView.m in Sources */,
@@ -525,6 +535,7 @@
 		};
 		89DC0C63182CC072007F3384 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89280F04184B14F800ED3843 /* iOS-Application.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -539,6 +550,7 @@
 		};
 		89DC0C64182CC072007F3384 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89280F04184B14F800ED3843 /* iOS-Application.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -553,6 +565,7 @@
 		};
 		89DC0C66182CC072007F3384 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89280F04184B14F800ED3843 /* iOS-Application.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/sss.app/sss";
@@ -577,6 +590,7 @@
 		};
 		89DC0C67182CC072007F3384 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89280F04184B14F800ED3843 /* iOS-Application.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/sss.app/sss";

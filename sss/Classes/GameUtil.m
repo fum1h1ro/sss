@@ -15,10 +15,15 @@
     newrc.origin.y = base.origin.y + inner.origin.y * base.size.height;
     return newrc;
 }
-//
+// 左上基準の非正規化座標から、左下基準の正規化座標に書き換える
 + (CGRect)calcWithUV:(CGRect)uv inTexture:(SKTexture*)texture {
     CGSize sz = [texture size];
-    CGRect st = CGRectMake(uv.origin.x / sz.width, uv.origin.y / sz.height, uv.size.width / sz.width, uv.size.height / sz.height);
+    CGRect st = CGRectMake(uv.origin.x, uv.origin.y, uv.size.width, uv.size.height);
+    st.origin.y = sz.height - st.origin.y - st.size.height;
+    st.origin.x /= sz.width;
+    st.origin.y /= sz.height;
+    st.size.width /= sz.width;
+    st.size.height /= sz.height;
     return st;
 }
 

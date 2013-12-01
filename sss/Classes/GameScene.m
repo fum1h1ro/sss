@@ -6,6 +6,12 @@
 #import "GameHID.h"
 
 @implementation GameScene
+@dynamic gameView;
+//
+- (GameView*)gameView {
+    return (GameView*)self.view;
+}
+//
 - (id)init {
     CGSize size = CGSizeMake(320, 480);
     //size.width *= 0.5f;

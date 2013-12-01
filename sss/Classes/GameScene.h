@@ -2,6 +2,7 @@
 #import "GameCamera.h"
 #import "GameObject.h"
 #import "GameObjectManager.h"
+#import "GameView.h"
 
 @interface GameScene : SKScene<SKPhysicsContactDelegate> {
     GameObjectManager* _objectManager;
@@ -11,6 +12,7 @@
 @property (strong, nonatomic) GameObjectManager* objectManager;
 @property (strong, nonatomic) GameCamera* camera;
 @property (assign, nonatomic) SEL nextSelector;
+@property (readonly, nonatomic) GameView* gameView;
 + (GameScene*)scene;
 + (SKEmitterNode*)createEmitterNode:(NSString*)name;
 - (void)beforeObjectUpdate;
