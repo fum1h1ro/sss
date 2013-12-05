@@ -27,15 +27,18 @@
         //self.xScale = 0.5f;
         //self.position = CGPointMake(40, 0);
         self.physicsWorld.contactDelegate = self;
+        [self calculateVisibleArea];
     }
     return self;
 }
 //
-- (void)update:(NSTimeInterval)dt {
-    [[GameTimer shared] update:dt];
+- (void)update:(NSTimeInterval)currentTime {
+    NS_LOG(@"%f", currentTime - _previousTime);
+    _previousTime = currentTime;
+    [[GameTimer shared] update:currentTime];
     [[GameHID shared] update];
     [self beforeObjectUpdate];
-    [_objectManager updateAllGameObject:dt];
+    [_objectManager updateAllGameObject:currentTime];
     [_camera update];
     [self afterObjectUpdate];
 #ifdef USE_DISPLAY_VIEW
@@ -79,5 +82,11 @@
     GameObject* objB = contact.bodyB.node.userData[@"GameObject"];
     if (objA) [objA didEndContact:contact with:objB];
     if (objB) [objB didEndContact:contact with:objA];
+}
+//
+- (void)calculateVisibleArea {
+    CGSize sz = self.size;
+    CGPoint anchor = self.anchorPoint;
+    _visibleArea = CGRectMake(-sz.width * anchor.x, -sz.height * anchor.y, sz.width, sz.height);
 }
 @end

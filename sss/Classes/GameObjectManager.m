@@ -35,6 +35,15 @@
         [_active addObjectsFromArray:_newbie];
         [_newbie removeAllObjects];
         // @todo ソートする
+        [_active sortUsingComparator:^(id objA, id objB) {
+            GameObject* a = (GameObject*)objA;
+            GameObject* b = (GameObject*)objB;
+            // 降順でソートする（priorityが大きいほど、先に処理される
+            if (a.priority > b.priority) {
+                return (NSComparisonResult)NSOrderedAscending;
+            }
+            return (NSComparisonResult)NSOrderedSame;
+        }];
     }
     u32 idx = 0;
     for (GameObject* obj in _active) {
@@ -53,14 +62,16 @@
         [_remove removeAllIndexes];
     }
 }
-// アクション計算後に呼ばれる（あまり必要でない気がする。アクション使わないので）
+// アクション計算後にGameSceneから呼ばれる（あまり必要でない気がする。アクション使わないので）
 - (void)didEvaluateActions {
+#if 0
     for (GameObject* obj in _active) {
         if ([obj respondsToSelector:@selector(didEvaluateActions)])
             [obj performSelector:@selector(didEvaluateActions)];
     }
+#endif
 }
-// 物理シミュ終了時に呼ばれる
+// 物理シミュ終了時にGameSceneから呼ばれる
 - (void)didSimulatePhysics {
     for (GameObject* obj in _active) {
         if ([obj respondsToSelector:@selector(didSimulatePhysics)])

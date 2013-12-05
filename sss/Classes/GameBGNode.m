@@ -1,14 +1,6 @@
-//
-//  GameBGNode.m
-//  sss
-//
-//  Created by Kanaya Fumihiro on 2013/11/27.
-//  Copyright (c) 2013年 alwaystesting. All rights reserved.
-//
-
 #import "GameBGNode.h"
 
-
+// 2Dマシン風のBGを管理するノード
 @implementation GameBGNode
 //
 - (id)initWithTMXFile:(NSString*)path size:(CGSize)sz {
@@ -53,13 +45,15 @@
     _pattern_column = (u32)sz.width / _header->tile_width;
     _pattern_row = (u32)sz.height / _header->tile_height;
     _npattern = _pattern_column * _pattern_row;
+    _mapSize = CGSizeMake(_header->map_xcount, _header->map_ycount);
+    _tileSize = CGSizeMake(_header->tile_width, _header->tile_height);
 }
 // 背景データに使用されているタイル番号から必要なSKTextureを作っておく
 - (void)makePatterns {
     // SKTexture*の配列を確保
     _patterns = (__strong SKTexture**)calloc(sizeof(SKTexture*), _npattern);
-    const u16 mw = _header->map_width;
-    const u16 mh = _header->map_height;
+    const u16 mw = _header->map_xcount;
+    const u16 mh = _header->map_ycount;
     for (u16 y = 0; y < mh; ++y) {
         for (u16 x = 0; x < mw; ++x) {
             const TMXTile* t = (_tiles + mw * y + x);
@@ -85,7 +79,7 @@
     }
     return _patterns[pid];
 }
-//
+// 必要な数のSKSpriteNodeを生成し、格子状に並べる
 - (void)makeNodes {
     u32 nodecount = _screen_xcount * _screen_ycount;
     // SKSpriteNode*の配列を確保
@@ -124,8 +118,10 @@
 }
 //
 - (void)updateNodesPatternFromX:(s32)srcx andY:(s32)srcy {
-    s32 mapw = _header->map_width;
-    s32 maph = _header->map_height;
+    s32 mapw = _header->map_xcount;
+    s32 maph = _header->map_ycount;
+    SKColor* clearColor = [SKColor clearColor];
+    SKColor* whiteColor = [SKColor whiteColor];
     for (s32 y = 0; y < _screen_ycount; ++y) {
         s32 sy = srcy + y;
         for (s32 x = 0; x < _screen_xcount; ++x) {
@@ -134,17 +130,18 @@
             SKSpriteNode* node = _nodes[idx];
             const TMXTile* t = (_tiles + mapw * sy + sx);
             if (sy < 0 || maph <= sy || sx < 0 || mapw <= sx || t->id < 0) {
-                // 範囲外が何もセットされていない
+                // 範囲外か、何もセットされていない
                 node.texture = nil;
-                node.color = [SKColor clearColor];
+                node.color = clearColor;
             } else {
                 if ((t->work & TMXTileOptionsNeedsToCallDelegate) && _delegate) {
                     const s16 oldid = t->id;
-                    [_delegate activateTile:(TMXTile*)t];
+                    CGPoint pos = CGPointMake(sx * _tileSize.width, sy * _tileSize.height);
+                    [_delegate activateTile:(TMXTile*)t position:pos];
                     if (oldid != t->id) [self getPattern:t->id];
                 }
                 node.texture = _patterns[t->id];
-                node.color = [SKColor whiteColor];
+                node.color = whiteColor;
             }
         }
     }

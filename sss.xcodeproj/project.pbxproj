@@ -14,6 +14,8 @@
 		89280F08184B4A6600ED3843 /* ScenePause.m in Sources */ = {isa = PBXBuildFile; fileRef = 89280F07184B4A6600ED3843 /* ScenePause.m */; };
 		89366FDA184215AD0005F941 /* reflect.sks in Resources */ = {isa = PBXBuildFile; fileRef = 89366FD9184215AD0005F941 /* reflect.sks */; };
 		89366FDC184325A80005F941 /* GameInstancePoolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89366FDB184325A80005F941 /* GameInstancePoolTests.m */; };
+		893C9994184C974F00BCF998 /* Background.m in Sources */ = {isa = PBXBuildFile; fileRef = 893C9993184C974F00BCF998 /* Background.m */; };
+		893C9998184F0CAA00BCF998 /* Enemy.m in Sources */ = {isa = PBXBuildFile; fileRef = 893C9997184F0CAA00BCF998 /* Enemy.m */; };
 		89500BDB1844CC7600968B6E /* stage.tmxbin in Resources */ = {isa = PBXBuildFile; fileRef = 89500BDA1844CC7600968B6E /* stage.tmxbin */; };
 		89500BDE1845CFAC00968B6E /* SceneTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 89500BDD1845CFAC00968B6E /* SceneTitle.m */; };
 		89500BE11845D48100968B6E /* SceneMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 89500BE01845D48100968B6E /* SceneMain.m */; };
@@ -64,6 +66,11 @@
 		89280F07184B4A6600ED3843 /* ScenePause.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenePause.m; sourceTree = "<group>"; };
 		89366FD9184215AD0005F941 /* reflect.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = reflect.sks; sourceTree = "<group>"; };
 		89366FDB184325A80005F941 /* GameInstancePoolTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameInstancePoolTests.m; sourceTree = "<group>"; };
+		893C9992184C974F00BCF998 /* Background.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Background.h; sourceTree = "<group>"; };
+		893C9993184C974F00BCF998 /* Background.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Background.m; sourceTree = "<group>"; };
+		893C9995184C999500BCF998 /* const.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = const.h; sourceTree = "<group>"; };
+		893C9996184F0CAA00BCF998 /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
+		893C9997184F0CAA00BCF998 /* Enemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy.m; sourceTree = "<group>"; };
 		89500BDA1844CC7600968B6E /* stage.tmxbin */ = {isa = PBXFileReference; lastKnownFileType = file; path = stage.tmxbin; sourceTree = "<group>"; };
 		89500BDC1845CFAC00968B6E /* SceneTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneTitle.h; sourceTree = "<group>"; };
 		89500BDD1845CFAC00968B6E /* SceneTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneTitle.m; sourceTree = "<group>"; };
@@ -264,19 +271,24 @@
 		89DC0CB1182E3D15007F3384 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				895210891836587E0046F123 /* Game */,
+				893C9995184C999500BCF998 /* const.h */,
 				89DC0CB5182E3F86007F3384 /* AppDelegate.h */,
 				89DC0CB6182E3F86007F3384 /* AppDelegate.m */,
+				893C9992184C974F00BCF998 /* Background.h */,
+				893C9993184C974F00BCF998 /* Background.m */,
 				895210821834BB8F0046F123 /* DisplayView.h */,
 				895210831834BB8F0046F123 /* DisplayView.m */,
-				89DC0CBB182E3F86007F3384 /* ViewController.h */,
-				89DC0CBC182E3F86007F3384 /* ViewController.m */,
-				89500BDC1845CFAC00968B6E /* SceneTitle.h */,
-				89500BDD1845CFAC00968B6E /* SceneTitle.m */,
+				895210891836587E0046F123 /* Game */,
 				89500BDF1845D48100968B6E /* SceneMain.h */,
 				89500BE01845D48100968B6E /* SceneMain.m */,
 				89280F06184B4A6600ED3843 /* ScenePause.h */,
 				89280F07184B4A6600ED3843 /* ScenePause.m */,
+				89500BDC1845CFAC00968B6E /* SceneTitle.h */,
+				89500BDD1845CFAC00968B6E /* SceneTitle.m */,
+				89DC0CBB182E3F86007F3384 /* ViewController.h */,
+				89DC0CBC182E3F86007F3384 /* ViewController.m */,
+				893C9996184F0CAA00BCF998 /* Enemy.h */,
+				893C9997184F0CAA00BCF998 /* Enemy.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -403,10 +415,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				893C9998184F0CAA00BCF998 /* Enemy.m in Sources */,
 				895210841834BB8F0046F123 /* DisplayView.m in Sources */,
 				89D227F1183CB47300FD45C0 /* GameUtil.m in Sources */,
 				89D227F8183CDB7D00FD45C0 /* GameCamera.m in Sources */,
 				89280F08184B4A6600ED3843 /* ScenePause.m in Sources */,
+				893C9994184C974F00BCF998 /* Background.m in Sources */,
 				895210881834FBB00046F123 /* GameObjectManager.m in Sources */,
 				89DC0CC6182E4BBB007F3384 /* GameHID.m in Sources */,
 				89DC0CBE182E3F86007F3384 /* GameView.m in Sources */,

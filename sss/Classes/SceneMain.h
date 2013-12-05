@@ -1,9 +1,9 @@
 #import "Game.h"
+#import "Background.h"
 
 @interface SceneMain : GameScene<GameBGNodeDelegate> {
-    GameBGNode* _bg;
+    Background* _background;
 }
-- (void)activateTile:(TMXTile*)tile;
 
 @end
 
@@ -31,8 +31,3 @@
 @property (strong, readonly, nonatomic) PlayerShotEffectRevolver* revolver;
 @end
 
-@interface Enemy : GameObject {
-    SKSpriteNode* _sprite;
-    CGFloat _damage;
-}
-@end

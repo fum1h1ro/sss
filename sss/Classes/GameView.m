@@ -7,12 +7,12 @@
     if (self = [super initWithFrame:frame]) {
         _sceneStack = [NSMutableArray arrayWithCapacity:8];
         _textureStack = [NSMutableArray arrayWithCapacity:8];
-#ifdef DEBUG
+//#ifdef DEBUG
         self.backgroundColor = [UIColor greenColor];
         self.showsFPS = YES;
         self.showsDrawCount = YES;
         self.showsNodeCount = YES;
-#endif
+//#endif
         self.contentScaleFactor = 1.0f;
     }
     return self;
