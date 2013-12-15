@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Profile.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
@@ -15,9 +16,12 @@
     self.viewcontroller = [[ViewController alloc] initWithNibName:nil bundle:nil];
     self.window.rootViewController = self.viewcontroller;
     [self.window makeKeyAndVisible];
+    [Profile shared];
+#if 0
     self.speechSynthesizer = [[AVSpeechSynthesizer alloc] init];
-    AVSpeechUtterance* ut = [AVSpeechUtterance speechUtteranceWithString:@"oh"];
+    AVSpeechUtterance* ut = [AVSpeechUtterance speechUtteranceWithString:@"get ready"];
     [self.speechSynthesizer speakUtterance:ut];
+#endif
     return YES;
 }
 // ホームボタン二回押しで、アプリ選択画面になると呼ばれる
@@ -44,5 +48,12 @@
 - (void)applicationWillTerminate:(UIApplication*)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     NS_LOG(@"%s", __PRETTY_FUNCTION__);
+}
+//
++ (id)readJSON:(NSString*)name {
+    NSString* path = [[NSBundle mainBundle] pathForResource:name ofType:@"json"];
+    NSData* data = [NSData dataWithContentsOfFile:path];
+    id r = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    return r;
 }
 @end

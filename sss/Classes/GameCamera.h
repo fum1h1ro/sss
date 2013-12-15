@@ -9,8 +9,8 @@
 #import <SpriteKit/SpriteKit.h>
 
 @interface GameCamera : SKNode {
-    GLKVector2 _target;
     f32 _twist;
 }
+@property (assign, nonatomic) CGPoint target;
 - (void)update;
 @end

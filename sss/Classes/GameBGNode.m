@@ -6,6 +6,7 @@
 - (id)initWithTMXFile:(NSString*)path size:(CGSize)sz {
     if (self = [super init]) {
         //NS_LOG(@"%@", path);
+        //NS_LOG(@"%d", sizeof(TMXTile));
         _screenSize = sz;
         _tmxbin = [NSMutableData dataWithContentsOfFile:path];
         if (_tmxbin) {
@@ -42,9 +43,9 @@
     _tiles = (TMXTile*)(_header + 1);
     _texture = [SKTexture textureWithImageNamed:[NSString stringWithUTF8String:_header->texturename]];
     CGSize sz = _texture.size;
-    _pattern_column = (u32)sz.width / _header->tile_width;
-    _pattern_row = (u32)sz.height / _header->tile_height;
-    _npattern = _pattern_column * _pattern_row;
+    _patternColumn = (u32)sz.width / _header->tile_width;
+    _patternRow = (u32)sz.height / _header->tile_height;
+    _npattern = _patternColumn * _patternRow;
     _mapSize = CGSizeMake(_header->map_xcount, _header->map_ycount);
     _tileSize = CGSizeMake(_header->tile_width, _header->tile_height);
 }
@@ -71,13 +72,33 @@
         const f32 tw = _header->tile_width / sz.width;
         const f32 th = _header->tile_height / sz.height;
         const f32 height = 1.0f;
-        s16 px = pid % _pattern_column;
-        s16 py = pid / _pattern_column;
+        s16 px = pid % _patternColumn;
+        s16 py = pid / _patternColumn;
         CGRect uvrc = CGRectMake(px * tw, py * th, tw, th);
         uvrc.origin.y = height - uvrc.origin.y - th;
         _patterns[pid] = [SKTexture textureWithRect:uvrc inTexture:_texture];
     }
     return _patterns[pid];
+}
+// パターン単位で任意の範囲のテクスチャを取得する。getPattern:と違ってキャッシュされない
+- (SKTexture*)getPattern:(s16)pid withSize:(CGSize)size {
+    CGSize sz = _texture.size;
+    const f32 tw = _header->tile_width / sz.width;
+    const f32 th = _header->tile_height / sz.height;
+    const f32 height = 1.0f;
+    s16 px = pid % _patternColumn;
+    s16 py = pid / _patternColumn;
+    s16 pw = size.width;
+    s16 ph = size.height;
+    CGRect uvrc = CGRectMake(px * tw, py * th, tw * pw, th * ph);
+    uvrc.origin.y = height - uvrc.origin.y - th;
+    return [SKTexture textureWithRect:uvrc inTexture:_texture];
+}
+//
+- (TMXTile*)getTileX:(s32)x andY:(s32)y {
+    s32 mapw = _header->map_xcount;
+    TMXTile* t = (_tiles + mapw * y + x);
+    return t;
 }
 // 必要な数のSKSpriteNodeを生成し、格子状に並べる
 - (void)makeNodes {
@@ -134,10 +155,10 @@
                 node.texture = nil;
                 node.color = clearColor;
             } else {
-                if ((t->work & TMXTileOptionsNeedsToCallDelegate) && _delegate) {
+                if ((t->attr & TMXTileOptionsNeedsToCallDelegate) && _delegate) {
                     const s16 oldid = t->id;
                     CGPoint pos = CGPointMake(sx * _tileSize.width, sy * _tileSize.height);
-                    [_delegate activateTile:(TMXTile*)t position:pos];
+                    [_delegate gameBGNode:self activateTile:(TMXTile*)t position:pos];
                     if (oldid != t->id) [self getPattern:t->id];
                 }
                 node.texture = _patterns[t->id];

@@ -1,5 +1,6 @@
 // vim: fenc=utf-8
 #import "GameView.h"
+#import "GameScene.h"
 
 @implementation GameView
 //
@@ -33,6 +34,7 @@
 //
 - (void)applicationWillResignActive {
     _isActive = NO;
+    ((GameScene*)self.scene).shouldPause = YES;
 }
 // 他のアプリに遷移した時点で呼ばれる
 - (void)applicationDidEnterBackground {

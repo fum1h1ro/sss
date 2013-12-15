@@ -9,14 +9,13 @@
     GameCamera* _camera;
     SEL _selector, _nextSelector;
     CGRect _visibleArea;
-    NSTimeInterval _previousTime;
 }
 @property (strong, nonatomic) GameObjectManager* objectManager;
 @property (strong, nonatomic) GameCamera* camera;
 @property (assign, nonatomic) SEL nextSelector;
 @property (readonly, nonatomic) GameView* gameView;
 @property (readonly, nonatomic) CGRect visibleArea;
-+ (GameScene*)scene;
+@property (assign, nonatomic) BOOL shouldPause;
 + (SKEmitterNode*)createEmitterNode:(NSString*)name;
 - (void)beforeObjectUpdate;
 - (void)afterObjectUpdate;

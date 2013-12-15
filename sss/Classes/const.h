@@ -22,3 +22,12 @@ typedef NS_OPTIONS(u32, kHITBIT) {
     kHITBIT_PLAYER_SHOT = (1<<3), // 自機の弾
     kHITBIT_PLAYER = (1<<4), // 自機
 };
+
+// 自機のパワーレベル
+typedef NS_ENUM(s32, kPLAYER_POWER) {
+    kPLAYER_POWER_0,
+    kPLAYER_POWER_1,
+    kPLAYER_POWER_2,
+    kPLAYER_POWER_3,
+    kPLAYER_POWER_MAX,
+};

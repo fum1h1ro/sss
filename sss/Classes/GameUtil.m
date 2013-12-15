@@ -43,7 +43,15 @@
 }
 //
 - (void)update:(NSTimeInterval)now {
-    _deltaTime = (f32)(now - _previousTime);
+    const f32 oneframe = (1.0f/60.0f);
+    if (_previousTime == 0.0f) {
+        _deltaTime = (f32)oneframe;
+    } else {
+        _deltaTime = fmin((f32)(now - _previousTime), oneframe * 4.0f);
+    }
+    if (_deltaTime <= 0.0f) {
+        _deltaTime = oneframe;
+    }
     _previousTime = now;
 }
 @end
@@ -97,11 +105,14 @@
     if (self = [super init]) {
         _size = num;
         _pool = [NSMutableArray arrayWithCapacity:num];
-        for (u32 i = 0; i < num; ++i) {
-            [_pool addObject:[self createInstance]];
-        }
     }
     return self;
+}
+//
+- (void)createInstances {
+    for (u32 i = 0; i < _size; ++i) {
+        [_pool addObject:[self createInstance]];
+    }
 }
 // ここをオーバーライドする
 - (id)createInstance {

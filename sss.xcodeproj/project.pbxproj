@@ -10,12 +10,15 @@
 		890C29B01839F0380068E0D9 /* bomb.sks in Resources */ = {isa = PBXBuildFile; fileRef = 890C29AE1839F0380068E0D9 /* bomb.sks */; };
 		890C29B11839F0380068E0D9 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 890C29AF1839F0380068E0D9 /* spark.png */; };
 		890C29B5183A27DE0068E0D9 /* jet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 890C29B4183A27DE0068E0D9 /* jet.sks */; };
+		890D99661850AC1B003C7819 /* small_bomb.sks in Resources */ = {isa = PBXBuildFile; fileRef = 890D99651850AC1B003C7819 /* small_bomb.sks */; };
+		89263DF91850B5730066C233 /* GameButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 89263DF81850B5730066C233 /* GameButtonNode.m */; };
 		89280F05184B14F800ED3843 /* iOS-Application.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 89280F04184B14F800ED3843 /* iOS-Application.xcconfig */; };
 		89280F08184B4A6600ED3843 /* ScenePause.m in Sources */ = {isa = PBXBuildFile; fileRef = 89280F07184B4A6600ED3843 /* ScenePause.m */; };
 		89366FDA184215AD0005F941 /* reflect.sks in Resources */ = {isa = PBXBuildFile; fileRef = 89366FD9184215AD0005F941 /* reflect.sks */; };
 		89366FDC184325A80005F941 /* GameInstancePoolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89366FDB184325A80005F941 /* GameInstancePoolTests.m */; };
 		893C9994184C974F00BCF998 /* Background.m in Sources */ = {isa = PBXBuildFile; fileRef = 893C9993184C974F00BCF998 /* Background.m */; };
 		893C9998184F0CAA00BCF998 /* Enemy.m in Sources */ = {isa = PBXBuildFile; fileRef = 893C9997184F0CAA00BCF998 /* Enemy.m */; };
+		894CB819185D4FDD003F9098 /* tiuntiun.sks in Resources */ = {isa = PBXBuildFile; fileRef = 894CB818185D4FDD003F9098 /* tiuntiun.sks */; };
 		89500BDB1844CC7600968B6E /* stage.tmxbin in Resources */ = {isa = PBXBuildFile; fileRef = 89500BDA1844CC7600968B6E /* stage.tmxbin */; };
 		89500BDE1845CFAC00968B6E /* SceneTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 89500BDD1845CFAC00968B6E /* SceneTitle.m */; };
 		89500BE11845D48100968B6E /* SceneMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 89500BE01845D48100968B6E /* SceneMain.m */; };
@@ -23,6 +26,7 @@
 		895210841834BB8F0046F123 /* DisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 895210831834BB8F0046F123 /* DisplayView.m */; };
 		895210881834FBB00046F123 /* GameObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 895210871834FBB00046F123 /* GameObjectManager.m */; };
 		896FADDD1830EE3100AD2DF1 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 896FADDC1830EE3100AD2DF1 /* GameScene.m */; };
+		8992AD0C1855F91000C42A1A /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 8992AD0B1855F91000C42A1A /* Profile.m */; };
 		89B882281833687F008DE700 /* GameTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B882271833687F008DE700 /* GameTouchView.m */; };
 		89D227EE183CA9B300FD45C0 /* main.png in Resources */ = {isa = PBXBuildFile; fileRef = 89D227ED183CA9B300FD45C0 /* main.png */; };
 		89D227F1183CB47300FD45C0 /* GameUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D227F0183CB47300FD45C0 /* GameUtil.m */; };
@@ -45,6 +49,7 @@
 		89DC0CC0182E3F86007F3384 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DC0CBC182E3F86007F3384 /* ViewController.m */; };
 		89DC0CC3182E404F007F3384 /* Test.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 89DC0CC2182E404F007F3384 /* Test.atlas */; };
 		89DC0CC6182E4BBB007F3384 /* GameHID.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DC0CC5182E4BBB007F3384 /* GameHID.m */; };
+		89FE0EE0185D96D100484743 /* groundenemytable.json in Resources */ = {isa = PBXBuildFile; fileRef = 89FE0EDF185D96D100484743 /* groundenemytable.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +66,9 @@
 		890C29AE1839F0380068E0D9 /* bomb.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = bomb.sks; sourceTree = "<group>"; };
 		890C29AF1839F0380068E0D9 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		890C29B4183A27DE0068E0D9 /* jet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = jet.sks; sourceTree = "<group>"; };
+		890D99651850AC1B003C7819 /* small_bomb.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = small_bomb.sks; sourceTree = "<group>"; };
+		89263DF71850B5730066C233 /* GameButtonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameButtonNode.h; sourceTree = "<group>"; };
+		89263DF81850B5730066C233 /* GameButtonNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameButtonNode.m; sourceTree = "<group>"; };
 		89280F04184B14F800ED3843 /* iOS-Application.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "iOS-Application.xcconfig"; path = "xcconfigs/iOS/iOS-Application.xcconfig"; sourceTree = SOURCE_ROOT; };
 		89280F06184B4A6600ED3843 /* ScenePause.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenePause.h; sourceTree = "<group>"; };
 		89280F07184B4A6600ED3843 /* ScenePause.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenePause.m; sourceTree = "<group>"; };
@@ -71,6 +79,7 @@
 		893C9995184C999500BCF998 /* const.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = const.h; sourceTree = "<group>"; };
 		893C9996184F0CAA00BCF998 /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
 		893C9997184F0CAA00BCF998 /* Enemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy.m; sourceTree = "<group>"; };
+		894CB818185D4FDD003F9098 /* tiuntiun.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = tiuntiun.sks; sourceTree = "<group>"; };
 		89500BDA1844CC7600968B6E /* stage.tmxbin */ = {isa = PBXFileReference; lastKnownFileType = file; path = stage.tmxbin; sourceTree = "<group>"; };
 		89500BDC1845CFAC00968B6E /* SceneTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneTitle.h; sourceTree = "<group>"; };
 		89500BDD1845CFAC00968B6E /* SceneTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneTitle.m; sourceTree = "<group>"; };
@@ -85,6 +94,8 @@
 		895210871834FBB00046F123 /* GameObjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameObjectManager.m; sourceTree = "<group>"; };
 		896FADDB1830EE3100AD2DF1 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		896FADDC1830EE3100AD2DF1 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
+		8992AD0A1855F91000C42A1A /* Profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Profile.h; sourceTree = "<group>"; };
+		8992AD0B1855F91000C42A1A /* Profile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Profile.m; sourceTree = "<group>"; };
 		89B882261833687F008DE700 /* GameTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTouchView.h; sourceTree = "<group>"; };
 		89B882271833687F008DE700 /* GameTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameTouchView.m; sourceTree = "<group>"; };
 		89D227ED183CA9B300FD45C0 /* main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main.png; sourceTree = "<group>"; };
@@ -119,6 +130,7 @@
 		89DC0CC2182E404F007F3384 /* Test.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Test.atlas; sourceTree = "<group>"; };
 		89DC0CC4182E4BBB007F3384 /* GameHID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameHID.h; sourceTree = "<group>"; };
 		89DC0CC5182E4BBB007F3384 /* GameHID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameHID.m; sourceTree = "<group>"; };
+		89FE0EDF185D96D100484743 /* groundenemytable.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = groundenemytable.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,10 +161,12 @@
 		890C29B3183A279A0068E0D9 /* Effects */ = {
 			isa = PBXGroup;
 			children = (
+				890D99651850AC1B003C7819 /* small_bomb.sks */,
 				890C29AF1839F0380068E0D9 /* spark.png */,
 				890C29AE1839F0380068E0D9 /* bomb.sks */,
 				890C29B4183A27DE0068E0D9 /* jet.sks */,
 				89366FD9184215AD0005F941 /* reflect.sks */,
+				894CB818185D4FDD003F9098 /* tiuntiun.sks */,
 			);
 			name = Effects;
 			sourceTree = "<group>";
@@ -180,8 +194,17 @@
 				89D227F0183CB47300FD45C0 /* GameUtil.m */,
 				89DC0CB7182E3F86007F3384 /* GameView.h */,
 				89DC0CB8182E3F86007F3384 /* GameView.m */,
+				89263DF71850B5730066C233 /* GameButtonNode.h */,
+				89263DF81850B5730066C233 /* GameButtonNode.m */,
 			);
 			name = Game;
+			sourceTree = "<group>";
+		};
+		8992AD091854551600C42A1A /* System */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = System;
 			sourceTree = "<group>";
 		};
 		89DC0C20182CC072007F3384 = {
@@ -260,6 +283,8 @@
 		89DC0CB0182E3CFC007F3384 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				89FE0EDF185D96D100484743 /* groundenemytable.json */,
+				8992AD091854551600C42A1A /* System */,
 				89500BDA1844CC7600968B6E /* stage.tmxbin */,
 				89D227ED183CA9B300FD45C0 /* main.png */,
 				890C29B3183A279A0068E0D9 /* Effects */,
@@ -289,6 +314,8 @@
 				89DC0CBC182E3F86007F3384 /* ViewController.m */,
 				893C9996184F0CAA00BCF998 /* Enemy.h */,
 				893C9997184F0CAA00BCF998 /* Enemy.m */,
+				8992AD0A1855F91000C42A1A /* Profile.h */,
+				8992AD0B1855F91000C42A1A /* Profile.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -373,10 +400,13 @@
 				890C29B11839F0380068E0D9 /* spark.png in Resources */,
 				89500BDB1844CC7600968B6E /* stage.tmxbin in Resources */,
 				89D227EE183CA9B300FD45C0 /* main.png in Resources */,
+				894CB819185D4FDD003F9098 /* tiuntiun.sks in Resources */,
 				89DC0C39182CC072007F3384 /* InfoPlist.strings in Resources */,
+				89FE0EE0185D96D100484743 /* groundenemytable.json in Resources */,
 				89DC0CC3182E404F007F3384 /* Test.atlas in Resources */,
 				89280F05184B14F800ED3843 /* iOS-Application.xcconfig in Resources */,
 				890C29B5183A27DE0068E0D9 /* jet.sks in Resources */,
+				890D99661850AC1B003C7819 /* small_bomb.sks in Resources */,
 				89DC0C4C182CC072007F3384 /* Images.xcassets in Resources */,
 				890C29B01839F0380068E0D9 /* bomb.sks in Resources */,
 				89366FDA184215AD0005F941 /* reflect.sks in Resources */,
@@ -416,10 +446,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				893C9998184F0CAA00BCF998 /* Enemy.m in Sources */,
+				8992AD0C1855F91000C42A1A /* Profile.m in Sources */,
 				895210841834BB8F0046F123 /* DisplayView.m in Sources */,
 				89D227F1183CB47300FD45C0 /* GameUtil.m in Sources */,
 				89D227F8183CDB7D00FD45C0 /* GameCamera.m in Sources */,
 				89280F08184B4A6600ED3843 /* ScenePause.m in Sources */,
+				89263DF91850B5730066C233 /* GameButtonNode.m in Sources */,
 				893C9994184C974F00BCF998 /* Background.m in Sources */,
 				895210881834FBB00046F123 /* GameObjectManager.m in Sources */,
 				89DC0CC6182E4BBB007F3384 /* GameHID.m in Sources */,
@@ -496,7 +528,7 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -553,6 +585,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "sss/sss-Prefix.pch";
 				INFOPLIST_FILE = "sss/sss-Info.plist";

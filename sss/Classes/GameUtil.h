@@ -32,6 +32,7 @@
 }
 @property (assign, nonatomic, readonly) u32 size;
 - (id)initWithNumOfStock:(u32)num;
+- (void)createInstances;
 - (id)createInstance;
 - (id)hireInstance;
 @end

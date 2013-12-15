@@ -14,4 +14,5 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) ViewController* viewcontroller;
 @property (strong, nonatomic) AVSpeechSynthesizer* speechSynthesizer;
++ (id)readJSON:(NSString*)name;
 @end

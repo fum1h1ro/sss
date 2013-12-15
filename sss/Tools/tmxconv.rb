@@ -95,7 +95,8 @@ class TmxFile
     bin
   end
   def gen_userdata(id)
-    0x01
+    props = @tile_properties[id]
+    0x01 | ((props['type'].to_i & 0xff) << 8)
   end
 
 

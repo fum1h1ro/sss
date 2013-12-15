@@ -18,5 +18,6 @@
 #import "GameObject.h"
 #import "GameObjectManager.h"
 #import "GameBGNode.h"
+#import "GameButtonNode.h"
 
 #endif

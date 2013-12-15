@@ -24,6 +24,7 @@
         //self.scaleMode = SKSceneScaleModeAspectFill;
         self.scaleMode = SKSceneScaleModeFill;
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:1.0 alpha:1.0];
+        self.anchorPoint = CGPointMake(0.5f, 0.5f);
         //self.xScale = 0.5f;
         //self.position = CGPointMake(40, 0);
         self.physicsWorld.contactDelegate = self;
@@ -33,8 +34,6 @@
 }
 //
 - (void)update:(NSTimeInterval)currentTime {
-    NS_LOG(@"%f", currentTime - _previousTime);
-    _previousTime = currentTime;
     [[GameTimer shared] update:currentTime];
     [[GameHID shared] update];
     [self beforeObjectUpdate];
