@@ -243,17 +243,6 @@ static EnemyScriptCode elems[] = {
     return self;
 }
 //
-- (void)updateInit:(GameObjectManager*)manager {
-#if 0
-    SKEmitterNode* emi = [GameScene createEmitterNode:@"jet"];
-    emi.zPosition = -100;
-    emi.position = CGPointMake(0, -10);
-    emi.targetNode = manager.scene;
-    [_sprite addChild:emi];
-#endif
-    self.updateFunction = @selector(updateNormal:);
-}
-//
 - (void)updateNormal:(GameObjectManager*)manager {
     if (self.lifeTime == 0.0f) {
         if (_preferNodeToAdd) {
@@ -273,7 +262,12 @@ static EnemyScriptCode elems[] = {
     }
     if (_hp <= 0) {
         SceneMain* scene = (SceneMain*)manager.scene;
-        SKEmitterNode* emitter = [scene.smallBombEffect hireInstance];
+        SKEmitterNode* emitter;
+        if (_size > 1) {
+            emitter = [scene.bombEffect hireInstance];
+        } else {
+            emitter = [scene.smallBombEffect hireInstance];
+        }
         emitter.zPosition = +100;
         emitter.position = pt;
         if (emitter.parent)

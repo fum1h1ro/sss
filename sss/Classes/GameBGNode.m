@@ -94,12 +94,6 @@
     uvrc.origin.y = height - uvrc.origin.y - th;
     return [SKTexture textureWithRect:uvrc inTexture:_texture];
 }
-//
-- (TMXTile*)getTileX:(s32)x andY:(s32)y {
-    s32 mapw = _header->map_xcount;
-    TMXTile* t = (_tiles + mapw * y + x);
-    return t;
-}
 // 必要な数のSKSpriteNodeを生成し、格子状に並べる
 - (void)makeNodes {
     u32 nodecount = _screen_xcount * _screen_ycount;
@@ -158,7 +152,7 @@
                 if ((t->attr & TMXTileOptionsNeedsToCallDelegate) && _delegate) {
                     const s16 oldid = t->id;
                     CGPoint pos = CGPointMake(sx * _tileSize.width, sy * _tileSize.height);
-                    [_delegate gameBGNode:self activateTile:(TMXTile*)t position:pos];
+                    [_delegate gameBGNode:self activateTile:(TMXTile*)t position:pos tileX:sx andY:sy];
                     if (oldid != t->id) [self getPattern:t->id];
                 }
                 node.texture = _patterns[t->id];
@@ -166,5 +160,15 @@
             }
         }
     }
+}
+//
+- (TMXTile*)getTileX:(s32)x andY:(s32)y {
+    s32 mapw = _header->map_xcount;
+    s32 maph = _header->map_ycount;
+    if (y < 0 || maph <= y || x < 0 || mapw <= x) {
+        return nil;
+    }
+    TMXTile* t = (_tiles + mapw * y + x);
+    return t;
 }
 @end

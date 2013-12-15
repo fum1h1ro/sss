@@ -78,7 +78,7 @@
 }
 //
 - (id)allocInstance {
-    u32 num = [_pool count];
+    NSUInteger num = [_pool count];
     if (num > 0) {
         id item = _pool[num-1];
         [_pool removeLastObject];
@@ -92,7 +92,7 @@
 }
 //
 - (u32)available {
-    return [_pool count];
+    return (u32)[_pool count];
 }
 @end
 // インスタンスを予め確保しておき、必要な時に貸し出す

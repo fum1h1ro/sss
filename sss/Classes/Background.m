@@ -43,7 +43,7 @@
 - (void)updateNodes {
     _bgNode.targetPosition = _targetPosition;
     [_bgNode updateNodes];
-    CGSize sz = _bgNode.screenSize;
+    //CGSize sz = _bgNode.screenSize;
     _originNode.position = CGPointMake(-_targetPosition.x, -_targetPosition.y);
 }
 @end

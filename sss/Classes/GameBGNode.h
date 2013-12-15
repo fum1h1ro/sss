@@ -26,7 +26,7 @@ typedef NS_OPTIONS(u32, TMXTileOptions) {
 // プロトコル
 // 特定のタイルが表示される際に呼び出される
 @protocol GameBGNodeDelegate
-- (void)gameBGNode:(GameBGNode*)node activateTile:(TMXTile*)tile position:(CGPoint)pos;
+- (void)gameBGNode:(GameBGNode*)node activateTile:(TMXTile*)tile position:(CGPoint)pos tileX:(s32)x andY:(s32)y;
 @end
 
 @interface GameBGNode : SKNode {

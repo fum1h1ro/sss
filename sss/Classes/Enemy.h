@@ -36,6 +36,7 @@
 // 地上の敵
 @interface EnemyOnGround : Enemy {
 }
+@property (assign, nonatomic) s32 size;
 - (id)initWithPos:(CGPoint)pos texture:(SKTexture*)tex;
 @end
 //

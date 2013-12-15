@@ -23,7 +23,7 @@
 - (id)initWithNumOfStock:(u32)num;
 - (id)createInstance;
 - (id)allocInstance;
-- (id)releaseInstance;
+- (void)releaseInstance:(id)ins;
 @end
 //
 @interface GameInstanceRevolver : NSObject {

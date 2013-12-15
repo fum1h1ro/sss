@@ -16,6 +16,7 @@
 }
 @property (strong, readonly, nonatomic) EffectRevolver* shotReflectEffect;
 @property (strong, readonly, nonatomic) EffectRevolver* smallBombEffect;
+@property (strong, readonly, nonatomic) EffectRevolver* bombEffect;
 @property (weak, nonatomic) Player* player;
 @end
 

@@ -14,7 +14,7 @@
     GameObjectManager* _manager;
     CGPoint _position;
     CGFloat _rotation;
-    NSTimeInterval lifeTime;
+    NSTimeInterval _lifeTime;
 }
 @property (strong, nonatomic) GameObjectManager* manager;
 @property (assign, nonatomic) CGPoint position;

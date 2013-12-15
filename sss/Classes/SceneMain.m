@@ -29,13 +29,13 @@
         [_objectManager addGameObject:_background];
         _background.bgNode.delegate = self;
         //
-        Player* p = [[Player alloc] init];
         self.player = [self createPlayer];
         EnemyInAir* enemy = [[EnemyInAir alloc] initWithPos:CGPointMake(0, 100)];
         [_objectManager addGameObject:enemy];
         // 使い回し用エフェクト
         _shotReflectEffect = [[EffectRevolver alloc] initWithNumOfStock:8 effectName:@"reflect"];
         _smallBombEffect = [[EffectRevolver alloc] initWithNumOfStock:8 effectName:@"small_bomb"];
+        _bombEffect = [[EffectRevolver alloc] initWithNumOfStock:8 effectName:@"bomb"];
 
 
         _groundenemytable = [AppDelegate readJSON:@"groundenemytable"];
@@ -46,7 +46,7 @@
         _score = [SKLabelNode labelNodeWithFontNamed:@"DIN Condensed"];
         _score.zPosition = 100;
         _score.fontSize = 16;
-        _score.text = [NSString localizedStringWithFormat:@"SCORE: %05ld", 0];
+        _score.text = [NSString localizedStringWithFormat:@"SCORE: %05ld", 0L];
         [self addChild:_score];
     }
     return self;
@@ -59,7 +59,11 @@
         [gameview pushScene:[[ScenePause alloc] init] transition:[SKTransition doorsCloseHorizontalWithDuration:0.5f]];
         self.shouldPause = NO;
     }
+#ifdef __LP64__
     _score.text = [NSString localizedStringWithFormat:@"SCORE: %05ld", [Profile shared].score];
+#else
+    _score.text = [NSString localizedStringWithFormat:@"SCORE: %05lld", [Profile shared].score];
+#endif
 }
 //
 - (void)afterObjectUpdate {
@@ -78,7 +82,7 @@
     }
 }
 //
-- (void)gameBGNode:(GameBGNode*)node activateTile:(TMXTile*)tile position:(CGPoint)pos {
+- (void)gameBGNode:(GameBGNode*)node activateTile:(TMXTile*)tile position:(CGPoint)pos tileX:(s32)tx andY:(s32)ty {
     // 敵のデータはgroundenemytable.jsonに記述されている
     NSDictionary* element = _groundenemytable[[NSString stringWithFormat:@"%d", tile->type]];
     if (element != nil) {
@@ -100,7 +104,7 @@
                 {
                     tex = [_background.bgNode getPattern:tile->id withSize:CGSizeMake(2, 2)];
                     tile->id = (tile->id / _background.bgNode.patternColumn) * _background.bgNode.patternColumn;
-                    u16 shift[] = { 0, 1, 0, 1 };
+                    const u16 shift[] = { 0, 1, 0, 1 };
                     tile->id += shift[offset];
                 }
                 break;
@@ -115,8 +119,9 @@
             enemy = [[EnemyOnGround alloc] initWithPos:pos texture:tex];
         }
         enemy.preferNodeToAdd = _background.originNode;
-        enemy.hp = [element[@"hp"] intValue];
-        enemy.score = [element[@"score"] intValue];
+        enemy.hp = [velement[@"hp"] intValue];
+        enemy.score = [velement[@"score"] intValue];
+        enemy.size = size;
         [_objectManager addGameObject:enemy];
     }
     // 再度呼ばれないようフラグを下げておく
@@ -314,7 +319,6 @@
 }
 //
 - (void)updateBomb:(GameObjectManager*)manager {
-    SceneMain* scene = (SceneMain*)manager.scene;
     SKEmitterNode* emitter = [GameScene createEmitterNode:@"tiuntiun"];
     emitter.zPosition = +100;
     emitter.position = _position;

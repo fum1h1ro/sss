@@ -1,6 +1,6 @@
 @class Player;
 
-@interface Background : GameObject<GameBGNodeDelegate> {
+@interface Background : GameObject {
     CGFloat _centerX;
 }
 @property (strong, nonatomic) GameBGNode* bgNode;
