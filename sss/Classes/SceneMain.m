@@ -28,6 +28,14 @@
         _background = [[Background alloc] initWithTMXFile:path size:sz];
         [_objectManager addGameObject:_background];
         _background.bgNode.delegate = self;
+        CGSize mapsz = _background.bgNode.mapSize;
+        CGSize tilesz = _background.bgNode.tileSize;
+        CGSize screensz = _background.bgNode.screenSize;
+        CGSize availablesz = CGSizeMake(mapsz.width * tilesz.width, screensz.height);
+        _availableRect = CGRectMake(-availablesz.width * 0.5f, -availablesz.height * 0.5f, availablesz.width, availablesz.height);
+        // INFO
+        _informationDisplay = [[InformationDisplay alloc] initWithSceneMain:self];
+        [_objectManager addGameObject:_informationDisplay];
         //
         self.player = [self createPlayer];
         EnemyInAir* enemy = [[EnemyInAir alloc] initWithPos:CGPointMake(0, 100)];
@@ -41,15 +49,14 @@
         _groundenemytable = [AppDelegate readJSON:@"groundenemytable"];
         NS_LOG(@"tbl:%@", _groundenemytable);
 
-
-
-        _score = [SKLabelNode labelNodeWithFontNamed:@"DIN Condensed"];
-        _score.zPosition = 100;
-        _score.fontSize = 16;
-        _score.text = [NSString localizedStringWithFormat:@"SCORE: %05ld", 0L];
-        [self addChild:_score];
+        _playTime = 60.0f * 2.0f + 1.0f;
+        [[Profile shared] reset];
     }
     return self;
+}
+@dynamic playTime;
+- (f32)playTime {
+    return fmin(_playTime, 60.0f * 2.0f);
 }
 //
 - (void)beforeObjectUpdate {
@@ -59,11 +66,7 @@
         [gameview pushScene:[[ScenePause alloc] init] transition:[SKTransition doorsCloseHorizontalWithDuration:0.5f]];
         self.shouldPause = NO;
     }
-#ifdef __LP64__
-    _score.text = [NSString localizedStringWithFormat:@"SCORE: %05ld", [Profile shared].score];
-#else
-    _score.text = [NSString localizedStringWithFormat:@"SCORE: %05lld", [Profile shared].score];
-#endif
+    _playTime -= [GameTimer shared].deltaTime;
 }
 //
 - (void)afterObjectUpdate {
@@ -94,7 +97,7 @@
             offset = tile->type - [link intValue];
         }
         s32 size = [velement[@"size"] intValue];
-        SKTexture* tex;
+        SKTexture* tex = nil;
         switch (size) {
             case 1:
                 tex = [_background.bgNode getPattern:tile->id];
@@ -102,34 +105,52 @@
                 break;
             case 2:
                 {
-                    tex = [_background.bgNode getPattern:tile->id withSize:CGSizeMake(2, 2)];
+                    const s32 ofs[][2] = {
+                        { 0, 0 },
+                        { -1, 0 },
+                        { 0, -1 },
+                        { -1, -1 },
+                    };
+                    const s32 basex = tx+ofs[offset][0];
+                    const s32 basey = ty+ofs[offset][1];
+                    TMXTile* t = [node getTileX:basex andY:basey];
+                    if (!(t->attr & TMXTileOptionsHadMadeObject)) {
+                        tex = [_background.bgNode getPattern:t->id withSize:CGSizeMake(2, 2)];
+                        t->attr |= TMXTileOptionsHadMadeObject;
+                    }
                     tile->id = (tile->id / _background.bgNode.patternColumn) * _background.bgNode.patternColumn;
                     const u16 shift[] = { 0, 1, 0, 1 };
                     tile->id += shift[offset];
+                    pos = CGPointMake(basex * node.tileSize.width, basey * node.tileSize.height);
                 }
                 break;
         }
         // 自タイルの位置に地上敵を生成する
-        EnemyOnGround* enemy;
-        // クラス名が指定されているかも知れない
-        if ([velement[@"klass"] length] > 0) {
-            Class cls = NSClassFromString(velement[@"klass"]);
-            enemy = [[cls alloc] initWithPos:pos texture:tex];
-        } else {
-            enemy = [[EnemyOnGround alloc] initWithPos:pos texture:tex];
+        if (tex != nil) {
+            EnemyOnGround* enemy;
+            // クラス名が指定されているかも知れない
+            if ([velement[@"klass"] length] > 0) {
+                Class cls = NSClassFromString(velement[@"klass"]);
+                enemy = [[cls alloc] initWithPos:pos texture:tex];
+            } else {
+                enemy = [[EnemyOnGround alloc] initWithPos:pos texture:tex];
+            }
+            enemy.preferNodeToAdd = _background.originNode;
+            enemy.hp = [velement[@"hp"] intValue];
+            enemy.score = [velement[@"score"] intValue];
+            enemy.bonus = [velement[@"bonus"] intValue];
+            enemy.cbonus = velement[@"cbonus"];
+            enemy.size = size;
+            enemy.next = velement[@"next"];
+            [_objectManager addGameObject:enemy];
         }
-        enemy.preferNodeToAdd = _background.originNode;
-        enemy.hp = [velement[@"hp"] intValue];
-        enemy.score = [velement[@"score"] intValue];
-        enemy.size = size;
-        [_objectManager addGameObject:enemy];
     }
     // 再度呼ばれないようフラグを下げておく
     tile->attr &= ~TMXTileOptionsNeedsToCallDelegate;
 }
 //
 - (Player*)createPlayer {
-    Player* player = [[Player alloc] init];
+    Player* player = [[Player alloc] initWithPos:CGPointMake(0, -300)];
     CGSize mapsz = _background.bgNode.mapSize;
     CGSize tilesz = _background.bgNode.tileSize;
     CGSize screensz = _background.bgNode.screenSize;
@@ -137,6 +158,38 @@
     player.availableArea = CGRectMake(-availablesz.width * 0.5f, -availablesz.height * 0.5f, availablesz.width, availablesz.height);
     [_objectManager addGameObject:player];
     return player;
+}
+//
+- (void)addBonus:(s64)bonus {
+    [_informationDisplay displayBonus:bonus];
+    [[Profile shared] addScore:bonus];
+}
+//
+- (void)addContinuousBonus:(NSArray*)bonustable {
+    NSInteger sz = [bonustable count];
+    NSInteger idx = (_continuousBonusIndex >= sz)? sz - 1 : _continuousBonusIndex;
+    [self addBonus:[bonustable[idx] intValue]];
+    _continuousBonusIndex += 1;
+}
+// 有効領域にそのCGRectを含むかどうか
+- (BOOL)includeRect:(CGRect)rc {
+    return CGRectIntersectsRect(rc, _availableRect);
+}
+// 上下のみチェック
+- (BOOL)includeRectHorizontally:(CGRect)rc {
+    CGFloat y0 = _availableRect.origin.y;
+    CGFloat y1 = CGRectGetMaxY(_availableRect);
+    CGFloat y2 = rc.origin.y;
+    CGFloat y3 = CGRectGetMaxY(rc);
+    return (y0 < y3) && (y1 >= y2);
+}
+// 左右のみチェック
+- (BOOL)includeRectVertically:(CGRect)rc {
+    CGFloat x0 = _availableRect.origin.x;
+    CGFloat x1 = CGRectGetMaxX(_availableRect);
+    CGFloat x2 = rc.origin.x;
+    CGFloat x3 = CGRectGetMaxX(rc);
+    return (x0 < x3) && (x1 >= x2);
 }
 @end
 
@@ -190,8 +243,7 @@
 }
 //
 - (void)willRemove {
-    _sprite.userData = nil;
-    [_sprite removeFromParent];
+    [super willRemove];
 }
 //
 - (void)didBeginContact:(SKPhysicsContact*)contact with:(GameObject*)other {
@@ -237,17 +289,18 @@
 //
 - (void)willRemove {
     //[_emitter removeFromParent];
+    [super willRemove];
 }
 @end
 
 
 @implementation Player
 //
-- (id)init {
+- (id)initWithPos:(CGPoint)pos {
     if (self = [super init]) {
         self.updateFunction = @selector(updateEnter:);
-        _position = CGPointMake(0, 0);
-        _power = kPLAYER_POWER_2;
+        _position = pos;
+        _power = kPLAYER_POWER_0;
 #if 0
         SKTextureAtlas* atlas = [SKTextureAtlas atlasNamed:@"Test"];
         SKTexture* base = [atlas textureNamed:@"sss"];
@@ -287,25 +340,25 @@
 }
 //
 - (void)willRemove {
-    _sprite.userData = nil;
-    [_sprite removeFromParent];
+    [super willRemove];
 }
 //
 - (void)updateEnter:(GameObjectManager*)manager {
-    if (self.lifeTime == 0.0f) {
-        [manager.scene.camera addChild:_sprite];
+    if (self.isUpdateFirst) {
+        if (self.lifeTime == 0.0f) {
+            [manager.scene.camera addChild:_sprite];
+        }
         _infinity = 4.0f;
-        _position = CGPointMake(0, -100);
+        _enterCount = 0.0f;
     }
-#if 0
-    SKEmitterNode* emi = [GameScene createEmitterNode:@"jet"];
-    emi.zPosition = -100;
-    emi.position = CGPointMake(0, -10);
-    emi.targetNode = manager.scene;
-    [_sprite addChild:emi];
-#endif
-    self.updateFunction = @selector(updateNormal:);
+    f32 dt = [GameTimer shared].deltaTime;
+    _position.y += 64.0f * dt;
+    [self applyPosture:_sprite];
     [self updateCommon];
+    if (_enterCount >= 2.0f) {
+        self.updateFunction = @selector(updateNormal:);
+    }
+    _enterCount += dt;
 }
 //
 - (void)updateNormal:(GameObjectManager*)manager {
@@ -401,7 +454,93 @@
         return YES;
     }
 }
+//
+- (void)applyPowerUp {
+    _power += 1;
+    if (_power >= kPLAYER_POWER_MAX) {
+        _power = kPLAYER_POWER_MAX - 1;
+    }
+}
 
 
 @end
 
+@implementation InformationDisplay
+- (instancetype)initWithSceneMain:(SceneMain*)scenemain {
+    if (self = [super init]) {
+        _sceneMain = scenemain;
+        NSString* fontname = @"DIN Condensed";
+        _score = [SKLabelNode labelNodeWithFontNamed:fontname];
+        _score.zPosition = 100;
+        _score.fontSize = 16;
+        _score.position = CGPointMake(-160, 160);
+        _score.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+        _time = [SKLabelNode labelNodeWithFontNamed:fontname];
+        _time.zPosition = 100;
+        _time.fontSize = 16;
+        _time.position = CGPointMake(-160, 160+16);
+        _time.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+        _bonus = [SKLabelNode labelNodeWithFontNamed:fontname];
+        _bonus.zPosition = 100;
+        _bonus.fontSize = 32;
+        _bonus.position = CGPointMake(0, 140);
+        _bonus.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+        _bonus.hidden = YES; // 最初は隠しておく
+        _bonus.alpha = 0.0f;
+        self.updateFunction = @selector(updateNormal:);
+        _dispScore = [Profile shared].score;
+        [self updateText];
+    }
+    return self;
+}
+- (void)updateText {
+#ifdef __LP64__
+    _score.text = [NSString localizedStringWithFormat:@"SCORE: %05ld", _dispScore];
+#else
+    _score.text = [NSString localizedStringWithFormat:@"SCORE: %05lld", _dispScore];
+#endif
+    s32 minutes = (s32)(_sceneMain.playTime / 60.0f);
+    s32 seconds = (s32)fmod(_sceneMain.playTime, 60.0f);
+    _time.text = [NSString stringWithFormat:@"%2d:%02d", minutes, seconds];
+}
+- (void)updateNormal:(GameObjectManager*)manager {
+    if (self.lifeTime == 0.0f) {
+        [manager.scene addChild:_score];
+        [manager.scene addChild:_time];
+        [manager.scene addChild:_bonus];
+    }
+    f32 dt = [GameTimer shared].deltaTime;
+    s64 diff = [Profile shared].score - _dispScore;
+    if (diff < 1000) {
+        _dispScore += 1000 * dt;
+    } else
+    if (diff < 10000) {
+        _dispScore += 10000 * dt;
+    } else {
+        _dispScore += 100000 * dt;
+    }
+    if (_dispScore > [Profile shared].score) {
+        _dispScore = [Profile shared].score;
+    }
+    [self updateText];
+}
+// ボーナスを表示する
+- (void)displayBonus:(s64)bonus {
+#ifdef __LP64__
+    _bonus.text = [NSString localizedStringWithFormat:@"BONUS %ld", bonus];
+#else
+    _bonus.text = [NSString localizedStringWithFormat:@"BONUS %lld", bonus];
+#endif
+    _bonus.hidden = NO;
+    _bonus.position = CGPointMake(0, 120);
+    NSArray* seq = @[
+        [SKAction group:@[
+            [SKAction fadeInWithDuration:0.25f],
+            [SKAction moveTo:CGPointMake(0, 140) duration:0.25f]]],
+        [SKAction waitForDuration:1.5f],
+        [SKAction group:@[
+            [SKAction fadeOutWithDuration:0.25f],
+            [SKAction moveTo:CGPointMake(0, 160) duration:0.25f]]]];
+    [_bonus runAction:[SKAction sequence:seq] completion:^() { _bonus.hidden = YES; }];
+}
+@end

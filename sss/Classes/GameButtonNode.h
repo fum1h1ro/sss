@@ -10,7 +10,8 @@
 
 @interface GameButtonNode : SKLabelNode {
 }
-@property (assign, nonatomic) BOOL cancelled;
-@property (assign, nonatomic) BOOL touched;
+@property (assign, readonly, nonatomic) BOOL cancelled;
+@property (assign, readonly, nonatomic) BOOL touched;
 - (id)initWithFontNamed:(NSString*)fontname;
+- (void)reset;
 @end

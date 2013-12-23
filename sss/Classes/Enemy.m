@@ -11,8 +11,21 @@
 
 @implementation Enemy
 //
-- (void)updateInit:(GameObjectManager*)manager {
-    self.updateFunction = @selector(updateNormal:);
+- (instancetype)initWithPos:(CGPoint)pos {
+    if (self = [super init]) {
+        _position = pos;
+        self.updateFunction = @selector(updateNormal:);
+        _hp = 1;
+    }
+    return self;
+}
+//
+- (void)updateCommon {
+    if (_sprite) {
+        [self applyPosture:_sprite];
+        _sprite.colorBlendFactor = _damage;
+    }
+    _damage *= 0.8f;
 }
 //
 - (void)updateNormal:(GameObjectManager*)manager {
@@ -25,11 +38,8 @@
     }
     [self evaluateScript:manager];
     [self move];
-    if (_sprite) {
-        [self applyPosture:_sprite];
-        _sprite.colorBlendFactor = _damage;
-    }
-    _damage *= 0.8f;
+    [self updateCommon];
+    [self checkDead:manager];
 }
 //
 - (void)didBeginContact:(SKPhysicsContact*)contact with:(GameObject*)other {
@@ -49,6 +59,33 @@
 - (void)setCode:(EnemyScriptCode*)code length:(u32)len {
     _code = code;
     _length = len;
+}
+//
+- (void)checkDead:(GameObjectManager*)manager {
+    if (_hp <= 0) {
+        SceneMain* scene = (SceneMain*)manager.scene;
+        SKEmitterNode* emitter;
+        if (_size > 1) {
+            emitter = [scene.bombEffect hireInstance];
+        } else {
+            emitter = [scene.smallBombEffect hireInstance];
+        }
+        emitter.zPosition = +100;
+        emitter.position = _sprite.position;
+        if (emitter.parent)
+            [emitter removeFromParent];
+        emitter.targetNode = _sprite.parent;
+        [_sprite.parent addChild:emitter];
+        [emitter resetSimulation]; // resetSimulationは、ノードを追加してから呼ばないとダメらしい
+        [self removeReservation];
+        [[Profile shared] addScore:_score];
+        if (_bonus > 0) {
+            [scene addBonus:_bonus];
+        }
+        if (_cbonus) {
+            [scene addContinuousBonus:_cbonus];
+        }
+    }
 }
 //
 - (void)evaluateScript:(GameObjectManager*)manager {
@@ -168,7 +205,7 @@ static EnemyScriptCode elems[] = {
 @implementation EnemyInAir
 //
 - (id)initWithPos:(CGPoint)pos {
-    if (self = [super init]) {
+    if (self = [super initWithPos:pos]) {
         self.updateFunction = @selector(updateNormal:);
         _position = pos;
         SKTexture* base = [SKTexture textureWithImageNamed:@"main"];
@@ -191,6 +228,11 @@ static EnemyScriptCode elems[] = {
         [self setCode:elems length:sizeof(elems)/sizeof(elems[0])];
     }
     return self;
+}
+// 何かに当たった
+- (void)didBeginContact:(SKPhysicsContact*)contact with:(GameObject*)other {
+    _damage = 1.0f;
+    _hp -= 1;
 }
 
 
@@ -221,7 +263,7 @@ static EnemyScriptCode elems[] = {
 @implementation EnemyOnGround
 //
 - (id)initWithPos:(CGPoint)pos texture:(SKTexture*)tex {
-    if (self = [super init]) {
+    if (self = [super initWithPos:pos]) {
         self.updateFunction = @selector(updateNormal:);
         // SKSpriteNodeのanchorPointで中心点からの表示位置を変更しても、
         // SKPhysicsBodyの中心点は変更にならない、かつ変更できないので、諦めて位置をずらす
@@ -234,11 +276,10 @@ static EnemyScriptCode elems[] = {
         _sprite.physicsBody.dynamic = NO; // 動かないので
         _sprite.physicsBody.categoryBitMask = kHITBIT_ENEMY_ON_GROUND;
         _sprite.physicsBody.collisionBitMask = kHITBIT_PLAYER_SHOT;
-        _sprite.physicsBody.contactTestBitMask = kHITBIT_PLAYER_SHOT;
+        _sprite.physicsBody.contactTestBitMask = 0;//kHITBIT_PLAYER_SHOT;
         //
         _sprite.color = [SKColor blackColor];
         [self applyPosture:_sprite];
-        _hp = 1;
     }
     return self;
 }
@@ -251,46 +292,41 @@ static EnemyScriptCode elems[] = {
             [manager.scene.camera addChild:_sprite];
         }
     }
-    _sprite.colorBlendFactor = _damage;
-    _damage *= 0.8f;
+    [self updateCommon];
     // 画面外（画面下のみ）に消えた場合、自分を消す
+    // 横方向をチェックしない理由は、自機の動きでスクロールし、無理矢理消すことが出来てしまうのを防ぐため
+    // @bug availableAreaでよくね？
     CGRect vrc = manager.scene.visibleArea;
     CGPoint pt = [_sprite convertPoint:CGPointMake(0, 0) toNode:manager.scene];
     CGSize sz = _sprite.size;
     if (pt.y < vrc.origin.y - sz.height * 0.5f) {
         [self removeReservation];
     }
-    if (_hp <= 0) {
-        SceneMain* scene = (SceneMain*)manager.scene;
-        SKEmitterNode* emitter;
-        if (_size > 1) {
-            emitter = [scene.bombEffect hireInstance];
-        } else {
-            emitter = [scene.smallBombEffect hireInstance];
-        }
-        emitter.zPosition = +100;
-        emitter.position = pt;
-        if (emitter.parent)
-            [emitter removeFromParent];
-        emitter.targetNode = _manager.scene;//.camera;
-        [manager.scene/*.camera*/ addChild:emitter];
-        [emitter resetSimulation]; // resetSimulationは、ノードを追加してから呼ばないとダメらしい
-        [self removeReservation];
-        [Profile shared].score += _score;
-    }
+    [self checkDead:manager];
 }
-//
+// 何かに当たった
 - (void)didBeginContact:(SKPhysicsContact*)contact with:(GameObject*)other {
     _damage = 1.0f;
     _hp -= 1;
 }
-//
+// 物理シミュ部分で、弾が当たったりした後、位置がずれてしまうので、強制的に戻す
 - (void)didSimulatePhysics {
     [self applyPosture:_sprite];
 }
 //
 - (void)willRemove {
-    [_sprite removeFromParent];
+    // 自分が消滅する時に、同時に何かを生成する指定があれば
+    if (self.next && _hp <= 0) {
+        // 地上敵は空中の敵と座標系が異なるので要変換
+        //  - 一度、シーンの座標系に変換
+        CGPoint pos = [_sprite convertPoint:CGPointMake(0, 0) toNode:_manager.scene];
+        //  - その後、カメラの座標系に変換
+        pos = [_manager.scene convertPoint:pos toNode:_manager.scene.camera];
+        Class cls = NSClassFromString(self.next);
+        GameObject* obj = [[cls alloc] initWithPos:pos];
+        [self.manager addGameObject:obj];
+    }
+    [super willRemove];
 }
 
 
@@ -308,10 +344,7 @@ static EnemyScriptCode elems[] = {
         _position = pos;
         _speed = speed;
         _dir = dir;
-        SKTexture* base = [SKTexture textureWithImageNamed:@"main"];
-        SKTexture* tex = [SKTexture textureWithRect:[GameUtil calcWithUV:CGRectMake(32, 0, 8, 8) inTexture:base] inTexture:base];
-        _sprite = [SKSpriteNode spriteNodeWithTexture:tex];
-        _sprite.userData = [@{@"GameObject" : self} mutableCopy];
+        _sprite = [self makeSpriteNode:@"main" rect:CGRectMake(4, 0, 1, 1)];
         _sprite.zPosition = (CGFloat)kOBJ_ZPOSITION_ENEMY_SHOT;
         _sprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:2.0f];
         _sprite.physicsBody.affectedByGravity = NO;
@@ -341,10 +374,6 @@ static EnemyScriptCode elems[] = {
     _position.y += sinf(_dir) * speed;
     _rotation += GAME_D2R(90.0f) * speed;
     [self applyPosture:_sprite];
-}
-//
-- (void)willRemove {
-    [_sprite removeFromParent];
 }
 //
 - (void)didBeginContact:(SKPhysicsContact*)contact with:(GameObject*)other {

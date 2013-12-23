@@ -47,7 +47,7 @@
     }
     u32 idx = 0;
     for (GameObject* obj in _active) {
-        [obj updateWithManager:self];
+        [obj updateByManager];
         // 削除要求が来ていたら、削除リストに追加しておく
         if (obj.isRemove) {
             [obj willRemove];

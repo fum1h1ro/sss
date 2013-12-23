@@ -11,6 +11,8 @@
 
 @interface Profile : NSObject
 + (Profile*)shared;
-@property (assign, nonatomic) s64 score;
-@property (assign, nonatomic) s64 hiScore;
+- (void)reset;
+- (void)addScore:(s64)sc;
+@property (assign, readonly, nonatomic) s64 score;
+@property (assign, readonly, nonatomic) s64 hiScore;
 @end

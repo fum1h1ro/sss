@@ -8,6 +8,10 @@
 
 #import "Game.h"
 
-@interface SceneTitle : GameScene
-
+@interface SceneTitle : GameScene {
+    GameButtonNode* _resumeButton;
+    SKSpriteNode* _bg;
+    NSTimeInterval _wait;
+    BOOL _poped;
+}
 @end

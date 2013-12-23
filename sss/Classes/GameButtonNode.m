@@ -18,6 +18,11 @@
     return self;
 }
 //
+- (void)reset {
+    self.colorBlendFactor = 0.0f;
+    _touched = NO;
+}
+//
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
     //NS_LOG(@"BEGAN");
     if (_touched) return;

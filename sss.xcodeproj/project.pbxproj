@@ -11,6 +11,7 @@
 		890C29B11839F0380068E0D9 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 890C29AF1839F0380068E0D9 /* spark.png */; };
 		890C29B5183A27DE0068E0D9 /* jet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 890C29B4183A27DE0068E0D9 /* jet.sks */; };
 		890D99661850AC1B003C7819 /* small_bomb.sks in Resources */ = {isa = PBXBuildFile; fileRef = 890D99651850AC1B003C7819 /* small_bomb.sks */; };
+		892297731867E94200B0518B /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 892297721867E94200B0518B /* Item.m */; };
 		89263DF91850B5730066C233 /* GameButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 89263DF81850B5730066C233 /* GameButtonNode.m */; };
 		89280F05184B14F800ED3843 /* iOS-Application.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 89280F04184B14F800ED3843 /* iOS-Application.xcconfig */; };
 		89280F08184B4A6600ED3843 /* ScenePause.m in Sources */ = {isa = PBXBuildFile; fileRef = 89280F07184B4A6600ED3843 /* ScenePause.m */; };
@@ -67,6 +68,8 @@
 		890C29AF1839F0380068E0D9 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		890C29B4183A27DE0068E0D9 /* jet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = jet.sks; sourceTree = "<group>"; };
 		890D99651850AC1B003C7819 /* small_bomb.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = small_bomb.sks; sourceTree = "<group>"; };
+		892297711867E94200B0518B /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		892297721867E94200B0518B /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		89263DF71850B5730066C233 /* GameButtonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameButtonNode.h; sourceTree = "<group>"; };
 		89263DF81850B5730066C233 /* GameButtonNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameButtonNode.m; sourceTree = "<group>"; };
 		89280F04184B14F800ED3843 /* iOS-Application.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "iOS-Application.xcconfig"; path = "xcconfigs/iOS/iOS-Application.xcconfig"; sourceTree = SOURCE_ROOT; };
@@ -316,6 +319,8 @@
 				893C9997184F0CAA00BCF998 /* Enemy.m */,
 				8992AD0A1855F91000C42A1A /* Profile.h */,
 				8992AD0B1855F91000C42A1A /* Profile.m */,
+				892297711867E94200B0518B /* Item.h */,
+				892297721867E94200B0518B /* Item.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -457,6 +462,7 @@
 				89DC0CC6182E4BBB007F3384 /* GameHID.m in Sources */,
 				89DC0CBE182E3F86007F3384 /* GameView.m in Sources */,
 				896FADDD1830EE3100AD2DF1 /* GameScene.m in Sources */,
+				892297731867E94200B0518B /* Item.m in Sources */,
 				89D227F5183CC1D200FD45C0 /* GameObject.m in Sources */,
 				89500BDE1845CFAC00968B6E /* SceneTitle.m in Sources */,
 				89B882281833687F008DE700 /* GameTouchView.m in Sources */,

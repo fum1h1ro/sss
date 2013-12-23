@@ -8,11 +8,12 @@
 
 #import "Game.h"
 
-@interface ScenePause : GameScene {
+@interface ScenePause : GameScene<UIAlertViewDelegate> {
+    GameButtonNode* _titleButton;
     GameButtonNode* _resumeButton;
     SKSpriteNode* _bg;
     NSTimeInterval _wait;
-    BOOL _poped;
+    BOOL _poped, _showAlert;
 }
 
 @end

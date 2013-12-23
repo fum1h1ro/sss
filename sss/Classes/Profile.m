@@ -9,6 +9,7 @@
 #import "Profile.h"
 
 @implementation Profile
+//
 + (Profile*)shared {
     static Profile* instance = nil;
     @synchronized(self) {
@@ -17,6 +18,17 @@
         }
     }
     return instance;
+}
+//
+- (void)reset {
+    _score = 0;
+}
+//
+- (void)addScore:(s64)sc {
+    _score += sc;
+    if (_score > _hiScore) {
+        _hiScore = _score;
+    }
 }
 
 @end

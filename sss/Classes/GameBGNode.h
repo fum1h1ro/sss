@@ -18,8 +18,9 @@ typedef struct {
 } TMXTile;
 #pragma pack(pop)
 
-typedef NS_OPTIONS(u32, TMXTileOptions) {
+typedef NS_OPTIONS(u8, TMXTileOptions) {
     TMXTileOptionsNeedsToCallDelegate = (1<<0),
+    TMXTileOptionsHadMadeObject = (1<<1),
 };
 @class GameBGNode;
 

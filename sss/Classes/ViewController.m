@@ -62,8 +62,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Create and configure the scene.
-    //SceneTitle* scene = [[SceneTitle alloc] init];
-    SceneMain* scene = [[SceneMain alloc] init];
+    SceneTitle* scene = [[SceneTitle alloc] init];
+    //SceneMain* scene = [[SceneMain alloc] init];
     // Present the scene.
     [self.gameView presentScene:scene];
 }

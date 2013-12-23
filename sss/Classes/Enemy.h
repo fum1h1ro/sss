@@ -12,10 +12,9 @@
 #import "Profile.h"
 
 @interface Enemy : GameObject {
-    SKSpriteNode* _sprite;
     CGFloat _damage;
     __weak SKNode* _preferNodeToAdd;
-    s32 _hp, _score;
+    s32 _hp, _score, _bonus, _size;
     f32 _speed, _dir;
     //
     EnemyScriptCode* _code;
@@ -26,8 +25,14 @@
 @property (weak, nonatomic) SKNode* preferNodeToAdd;
 @property (assign, nonatomic) s32 hp;
 @property (assign, nonatomic) s32 score;
+@property (assign, nonatomic) s32 bonus;
+@property (strong, nonatomic) NSArray* cbonus;
+@property (assign, nonatomic) s32 size;
+@property (strong, nonatomic) NSString* next;
 - (id)initWithPos:(CGPoint)pos;
 - (void)setCode:(EnemyScriptCode*)code length:(u32)len;
+- (void)updateCommon;
+- (void)checkDead:(GameObjectManager*)manager;
 @end
 // 空中の敵
 @interface EnemyInAir : Enemy {
@@ -36,12 +41,10 @@
 // 地上の敵
 @interface EnemyOnGround : Enemy {
 }
-@property (assign, nonatomic) s32 size;
 - (id)initWithPos:(CGPoint)pos texture:(SKTexture*)tex;
 @end
 //
 @interface EnemyShot : GameObject {
-    SKSpriteNode* _sprite;
     f32 _speed, _dir;
 }
 - (id)initWithPos:(CGPoint)pos speed:(f32)speed dir:(f32)dir;

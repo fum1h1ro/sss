@@ -15,6 +15,7 @@
     CGPoint _position;
     CGFloat _rotation;
     NSTimeInterval _lifeTime;
+    SKSpriteNode* _sprite;
 }
 @property (strong, nonatomic) GameObjectManager* manager;
 @property (assign, nonatomic) CGPoint position;
@@ -24,13 +25,15 @@
 @property (assign, readonly, nonatomic) BOOL isUpdateFirst;
 @property (assign, readonly, nonatomic) BOOL isRemove;
 @property (assign, nonatomic) SEL updateFunction;
+@property (strong, nonatomic) SKSpriteNode* sprite;
 - (void)resetAsNewbie;
-- (void)updateWithManager:(GameObjectManager*)manager;
+- (void)updateByManager;
 - (void)removeReservation;
 - (BOOL)isVisible:(SKNode*)node;
 - (void)willRemove;
 - (void)didBeginContact:(SKPhysicsContact*)contact with:(GameObject*)other;
 - (void)didEndContact:(SKPhysicsContact*)contact with:(GameObject*)other;
 - (void)applyPosture:(SKNode*)node;
+- (SKSpriteNode*)makeSpriteNode:(NSString*)texname rect:(CGRect)rc;
 @end
 
