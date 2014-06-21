@@ -15,12 +15,12 @@
     CGFloat _damage;
     __weak SKNode* _preferNodeToAdd;
     s32 _hp, _score, _bonus, _size;
-    f32 _speed, _dir;
+    f32 _speed, _dir, _steer;
     //
-    EnemyScriptCode* _code;
     u32 _length;
+    EnemyScriptCode* _code;
     EnemyScriptCode* _pc;
-    f32 _register[REG_MAX];
+    f32 _wait;
 }
 @property (weak, nonatomic) SKNode* preferNodeToAdd;
 @property (assign, nonatomic) s32 hp;
@@ -33,9 +33,11 @@
 - (void)setCode:(EnemyScriptCode*)code length:(u32)len;
 - (void)updateCommon;
 - (void)checkDead:(GameObjectManager*)manager;
+- (void)applyDamage;
 @end
 // 空中の敵
 @interface EnemyInAir : Enemy {
+    BOOL _visible;
 }
 @end
 // 地上の敵
@@ -48,4 +50,9 @@
     f32 _speed, _dir;
 }
 - (id)initWithPos:(CGPoint)pos speed:(f32)speed dir:(f32)dir;
+@end
+//
+@interface EnemyTest : EnemyInAir
+@end
+@interface EnemyMiddleBomber : EnemyInAir
 @end

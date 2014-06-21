@@ -71,7 +71,7 @@
     //NS_LOG(@"BEGIN");
     GameObject* objA = contact.bodyA.node.userData[@"GameObject"];
     GameObject* objB = contact.bodyB.node.userData[@"GameObject"];
-    if (objA) [objA didBeginContact:contact with:objB];
+    //if (objA) [objA didBeginContact:contact with:objB];
     if (objB) [objB didBeginContact:contact with:objA];
 }
 //
@@ -79,7 +79,7 @@
     //NS_LOG(@"END");
     GameObject* objA = contact.bodyA.node.userData[@"GameObject"];
     GameObject* objB = contact.bodyB.node.userData[@"GameObject"];
-    if (objA) [objA didEndContact:contact with:objB];
+    //if (objA) [objA didEndContact:contact with:objB];
     if (objB) [objB didEndContact:contact with:objA];
 }
 //

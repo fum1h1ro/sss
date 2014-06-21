@@ -1,5 +1,6 @@
 #import "Game.h"
 #import "Background.h"
+#import "EnemyGenerator.h"
 
 @interface EffectRevolver : GameInstanceRevolver {
     NSString* _effname;
@@ -13,9 +14,11 @@
 @interface SceneMain : GameScene<GameBGNodeDelegate> {
     Background* _background;
     NSDictionary* _groundenemytable;
+    NSArray* _enemytable;
     f32 _playTime;
     InformationDisplay* _informationDisplay;
     s32 _continuousBonusIndex;
+    EnemyGenerator* _enemyGenerator;
 }
 @property (strong, readonly, nonatomic) EffectRevolver* shotReflectEffect;
 @property (strong, readonly, nonatomic) EffectRevolver* smallBombEffect;

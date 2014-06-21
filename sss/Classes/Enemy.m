@@ -29,6 +29,7 @@
 }
 //
 - (void)updateNormal:(GameObjectManager*)manager {
+#if 0
     if (self.lifeTime == 0.0f) {
         if (_preferNodeToAdd) {
             [_preferNodeToAdd addChild:_sprite];
@@ -36,6 +37,7 @@
             [manager.scene.camera addChild:_sprite];
         }
     }
+#endif
     [self evaluateScript:manager];
     [self move];
     [self updateCommon];
@@ -43,17 +45,18 @@
 }
 //
 - (void)didBeginContact:(SKPhysicsContact*)contact with:(GameObject*)other {
-    _damage = 1.0f;
 }
 //
 - (void)didSimulatePhysics {
 }
 //
 - (void)move {
-    f32 dt = [GameTimer shared].deltaTime;
+    const f32 dt = [GameTimer shared].deltaTime;
     f32 spd = _speed * dt;
+    _dir += _steer * dt;
     _position.x += cos(GAME_D2R(_dir)) * spd;
     _position.y += sin(GAME_D2R(_dir)) * spd;
+    _rotation = GAME_D2R(_dir);
 }
 //
 - (void)setCode:(EnemyScriptCode*)code length:(u32)len {
@@ -88,6 +91,11 @@
     }
 }
 //
+- (void)applyDamage {
+    _hp -= 1;
+    _damage = 1.0f;
+}
+//
 - (void)evaluateScript:(GameObjectManager*)manager {
     if (!_code) return;
     if (!_pc) _pc = _code;
@@ -96,71 +104,92 @@
     for (;;) {
         u32 len = _pc - _code;
         if (len >= _length) break;
+        if (_wait > 0.0f) {
+            _wait = fmax(_wait - dt, 0.0f);
+            break;
+        }
         switch (_pc->opcode) {
-            case OP_YIELD:
-                yield = YES;
+            case _OP_WAIT:
+                _wait = (f32)_pc->param * 0.01f;
                 ++_pc;
                 break;
-            case OP_LI:
-                _register[_pc->a] = _pc->b;
-                ++_pc;
-                break;
-            case OP_ADD:
-                _register[_pc->a] += _pc->b;
-                ++_pc;
-                break;
-            case OP_SUB:
-                _register[_pc->a] -= _pc->b;
-                ++_pc;
-                break;
-            case OP_MUL:
-                _register[_pc->a] *= _pc->b;
-                ++_pc;
-                break;
-            case OP_DIV:
-                _register[_pc->a] /= _pc->b;
-                ++_pc;
-                break;
-            case OP_SPEED:
-                _speed = _register[_pc->a];
-                ++_pc;
-                break;
-            case OP_DIR:
-                _dir = _register[_pc->a];
-                ++_pc;
-                break;
-            case OP_ROTATE:
-                _dir += _register[_pc->a] * dt;
-                ++_pc;
-                break;
-            case OP_WAIT:
+            case _OP_TEX:
                 {
-                    f32 w = _register[_pc->a];
-                    w -= [GameTimer shared].deltaTime;
-                    if (w <= 0.0f) {
-                        ++_pc;
-                    } else {
-                        _register[_pc->a] = w;
-                        yield = YES;
+                    s32 x = (_pc->param >> 0) & 0xff;
+                    s32 y = (_pc->param >> 8) & 0xff;
+                    s32 w = (_pc->param >> 16) & 0xff;
+                    s32 h = (_pc->param >> 24) & 0xff;
+                    if (_sprite) {
+                        if (_sprite.parent) [_sprite removeFromParent];
+                        _sprite = nil;
                     }
+                    _sprite = [self makeSpriteNode:@"main" rect:CGRectMake(x, y, w, h)];
+                    _sprite.zPosition = (CGFloat)kOBJ_ZPOSITION_ENEMY_IN_AIR;
+                    _sprite.color = [SKColor blackColor];
+                    [_manager.scene.camera addChild:_sprite];
+                    ++_pc;
                 }
                 break;
-            case OP_JMP:
+            case _OP_SPEED:
+                _speed = (f32)_pc->param;
+                ++_pc;
+                break;
+            case _OP_DIR:
+                _dir = (f32)_pc->param;
+                ++_pc;
+                break;
+            case _OP_ROTATE:
+                _steer = (f32)_pc->param;
+                ++_pc;
+                break;
+            case _OP_HP:
+                _hp = _pc->param;
+                ++_pc;
+                break;
+            case _OP_HITRECT:
                 {
-                    const u8 lbl = _pc->a;
-                    for (int i = 0; i < _length; ++i) {
-                        EnemyScriptCode* c = &_code[i];
-                        if (c->label == lbl) {
-                            _pc = c;
-                            break;
-                        }
+                    s32 w = (_pc->param >> 0) & 0xffff;
+                    s32 h = (_pc->param >> 16) & 0xffff;
+                    if (_sprite) {
+                        SKPhysicsBody* pb = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(w, h)];
+                        pb.affectedByGravity = NO;
+                        pb.dynamic = NO;
+                        pb.mass = 0;
+                        pb.restitution = 0;
+                        pb.categoryBitMask = kHITBIT_ENEMY_IN_AIR;
+                        pb.collisionBitMask = kHITBIT_PLAYER;
+                        pb.contactTestBitMask = kHITBIT_PLAYER;
+                        _sprite.physicsBody = pb;
                     }
+                    ++_pc;
                 }
                 break;
-            case OP_SHOT:
+            case _OP_HITCIRCLE:
                 {
-                    f32 d = _register[_pc->a];
-                    f32 spd = _pc->b;
+                    s32 r = _pc->param;
+                    if (_sprite) {
+                        SKPhysicsBody* pb = [SKPhysicsBody bodyWithCircleOfRadius:r];
+                        pb.affectedByGravity = NO;
+                        pb.dynamic = NO;
+                        pb.mass = 0;
+                        pb.restitution = 0;
+                        pb.categoryBitMask = kHITBIT_ENEMY_IN_AIR;
+                        pb.collisionBitMask = kHITBIT_PLAYER;
+                        pb.contactTestBitMask = kHITBIT_PLAYER;
+                        _sprite.physicsBody = pb;
+                    }
+                    ++_pc;
+                }
+                break;
+            case _OP_JMP:
+                {
+                    _pc = &_code[_pc->param];
+                }
+                break;
+            case _OP_SHOT:
+                {
+                    f32 d = _pc->param;
+                    f32 spd = 96.0f;//固定
                     // 角度が負なら、自機を狙って撃つ
                     SceneMain* scene = manager.scene;
                     if (d < 0 && scene.player != nil) {
@@ -168,7 +197,7 @@
                         d = atan2(player.position.y - _position.y, player.position.x - _position.x);
                     }
                     EnemyShot* shot = [[EnemyShot alloc] initWithPos:_position speed:spd dir:d];
-                    [manager addGameObject:shot];
+                    [_manager addGameObject:shot];
                 }
                 ++_pc;
                 break;
@@ -182,21 +211,8 @@
 //
 
 
-static EnemyScriptCode elems[] = {
-    { 0, OP_YIELD },
-    { 0, OP_LI, REG_A, 270 },
-    { 0, OP_DIR, REG_A },
-    { 0, OP_LI, REG_B, 50 },
-    { 0, OP_SPEED, REG_B },
-    { 0, OP_ADD, REG_A, 1 },
-    { 1, OP_ROTATE, REG_A },
-    { 0, OP_LI, REG_C, -1 },
-    //{ 0, OP_SHOT, REG_C, 200 },
-    { 0, OP_YIELD },
-    { 0, OP_JMP, 1 },
-};
 
-
+#import "EnemyCode.h"
 
 
 
@@ -206,8 +222,10 @@ static EnemyScriptCode elems[] = {
 //
 - (id)initWithPos:(CGPoint)pos {
     if (self = [super initWithPos:pos]) {
+        self.type = kOBJTYPE_ENEMY_IN_AIR;
         self.updateFunction = @selector(updateNormal:);
         _position = pos;
+#if 0
         SKTexture* base = [SKTexture textureWithImageNamed:@"main"];
         SKTexture* tex = [SKTexture textureWithRect:[GameUtil calcWithUV:CGRectMake(32, 8, 16, 16) inTexture:base] inTexture:base];
         _sprite = [SKSpriteNode spriteNodeWithTexture:tex];
@@ -225,17 +243,32 @@ static EnemyScriptCode elems[] = {
         //
         _sprite.color = [SKColor blackColor];
         [self applyPosture:_sprite];
-        [self setCode:elems length:sizeof(elems)/sizeof(elems[0])];
+#endif
     }
     return self;
 }
 // 何かに当たった
 - (void)didBeginContact:(SKPhysicsContact*)contact with:(GameObject*)other {
-    _damage = 1.0f;
-    _hp -= 1;
+    //_damage = 1.0f;
+    //_hp -= 1;
+    [(Player*)other damage];
 }
-
-
+//
+- (void)updateNormal:(GameObjectManager*)manger {
+    SceneMain* scene = (SceneMain*)_manager.scene;
+    if (!_visible) {
+        if ([scene includeRectHorizontally:CGRectMake(_position.x, _position.y, 16, 16)]) {
+            _visible = YES;
+        }
+    } else
+    if (![scene includeRectHorizontally:CGRectMake(_position.x, _position.y, 16, 16)]) {
+        [self removeReservation];
+    }
+    [self evaluateScript:_manager];
+    [self move];
+    [self updateCommon];
+    [self checkDead:_manager];
+}
 
 
 
@@ -264,6 +297,7 @@ static EnemyScriptCode elems[] = {
 //
 - (id)initWithPos:(CGPoint)pos texture:(SKTexture*)tex {
     if (self = [super initWithPos:pos]) {
+        self.type = kOBJTYPE_ENEMY_ON_GROUND;
         self.updateFunction = @selector(updateNormal:);
         // SKSpriteNodeのanchorPointで中心点からの表示位置を変更しても、
         // SKPhysicsBodyの中心点は変更にならない、かつ変更できないので、諦めて位置をずらす
@@ -306,8 +340,8 @@ static EnemyScriptCode elems[] = {
 }
 // 何かに当たった
 - (void)didBeginContact:(SKPhysicsContact*)contact with:(GameObject*)other {
-    _damage = 1.0f;
-    _hp -= 1;
+    //_damage = 1.0f;
+    //_hp -= 1;
 }
 // 物理シミュ部分で、弾が当たったりした後、位置がずれてしまうので、強制的に戻す
 - (void)didSimulatePhysics {
@@ -381,5 +415,24 @@ static EnemyScriptCode elems[] = {
     if ([player damage]) {
         [self removeReservation];
     }
+}
+@end
+
+
+
+@implementation EnemyTest
+- (instancetype)initWithPos:(CGPoint)pos {
+    if (self = [super initWithPos:pos]) {
+        [self setCode:table[0].code length:table[0].size];
+    }
+    return self;
+}
+@end
+@implementation EnemyMiddleBomber
+- (instancetype)initWithPos:(CGPoint)pos {
+    if (self = [super initWithPos:pos]) {
+        [self setCode:table[1].code length:table[1].size];
+    }
+    return self;
 }
 @end

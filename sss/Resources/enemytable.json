@@ -1,0 +1,15 @@
+[
+    [ 5, "nop" ],
+    [ 0.5, "EnemyTest", -100, 340 ],
+    [ 0.5, "EnemyTest", -100, 340 ],
+    [ 0.5, "EnemyTest", -100, 340 ],
+    [ 0.5, "EnemyTest", -100, 340 ],
+    [ 0.5, "EnemyTest", -100, 340 ],
+    [ 0.5, "EnemyTest", -100, 340 ],
+    [ 0.5, "EnemyTest", -100, 340 ],
+    [ 0.5, "EnemyTest", -100, 340 ],
+    [ 1, "wait" ],
+    [ 0, "EnemyMiddleBomber", -100, -340 ],
+    [ 0.5, "EnemyMiddleBomber", 100, -340 ],
+    [ 5, "wait" ],
+]

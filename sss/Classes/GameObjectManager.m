@@ -46,7 +46,11 @@
         }];
     }
     u32 idx = 0;
+    _populationsIndex = ~_populationsIndex & 1;
+    const s32 pidx = ~_populationsIndex & 1;
+    for (int i = 0; i < 16; ++i) _populations[i][pidx] = 0;
     for (GameObject* obj in _active) {
+        _populations[obj.type][pidx] += 1;
         [obj updateByManager];
         // 削除要求が来ていたら、削除リストに追加しておく
         if (obj.isRemove) {
@@ -77,6 +81,10 @@
         if ([obj respondsToSelector:@selector(didSimulatePhysics)])
             [obj performSelector:@selector(didSimulatePhysics)];
     }
+}
+//
+- (s32)populationWithType:(u16)type {
+    return _populations[type][_populationsIndex];
 }
 @end
 

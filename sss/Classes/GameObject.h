@@ -21,6 +21,7 @@
 @property (assign, nonatomic) CGPoint position;
 @property (assign, nonatomic) CGFloat rotation;
 @property (assign, readonly, nonatomic) NSTimeInterval lifeTime;
+@property (assign, nonatomic) u16 type;
 @property (assign, nonatomic) s32 priority;
 @property (assign, readonly, nonatomic) BOOL isUpdateFirst;
 @property (assign, readonly, nonatomic) BOOL isRemove;

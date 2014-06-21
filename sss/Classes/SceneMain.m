@@ -38,16 +38,23 @@
         [_objectManager addGameObject:_informationDisplay];
         //
         self.player = [self createPlayer];
+#if 0
         EnemyInAir* enemy = [[EnemyInAir alloc] initWithPos:CGPointMake(0, 100)];
         [_objectManager addGameObject:enemy];
+#endif
         // 使い回し用エフェクト
         _shotReflectEffect = [[EffectRevolver alloc] initWithNumOfStock:8 effectName:@"reflect"];
         _smallBombEffect = [[EffectRevolver alloc] initWithNumOfStock:8 effectName:@"small_bomb"];
         _bombEffect = [[EffectRevolver alloc] initWithNumOfStock:8 effectName:@"bomb"];
 
 
+        _enemytable = [AppDelegate readJSON:@"enemytable"];
+        NS_LOG(@"tbl:%@", _enemytable);
         _groundenemytable = [AppDelegate readJSON:@"groundenemytable"];
         NS_LOG(@"tbl:%@", _groundenemytable);
+        //
+        _enemyGenerator = [[EnemyGenerator alloc] initWithManager:_objectManager];
+        _enemyGenerator.table = _enemytable;
 
         _playTime = 60.0f * 2.0f + 1.0f;
         [[Profile shared] reset];
@@ -83,6 +90,7 @@
     } else {
         _player = [self createPlayer];
     }
+    [_enemyGenerator update];
 }
 //
 - (void)gameBGNode:(GameBGNode*)node activateTile:(TMXTile*)tile position:(CGPoint)pos tileX:(s32)tx andY:(s32)ty {
@@ -250,6 +258,7 @@
     [self removeReservation];
     PlayerShotEffect* eff = [[PlayerShotEffect alloc] initWithPos:contact.contactPoint dir:_rotation];
     [_manager addGameObject:eff];
+    [(Enemy*)other applyDamage];
 }
 
 
